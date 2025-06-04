@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase Sprite que se desprende de Bebida.
  *

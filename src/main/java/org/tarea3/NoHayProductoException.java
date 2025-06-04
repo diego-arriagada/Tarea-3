@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Excepción que se lanza cuando no hay un producto solicitado.
  *

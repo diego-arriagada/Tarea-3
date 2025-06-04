@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase abstracta Moneda, que forma la base de la jerarquía de monedas.
  *

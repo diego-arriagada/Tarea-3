@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase Super8 que se desprende de Dulce.
  *

@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase abstracta Dulce que se desprende de Producto.
  *

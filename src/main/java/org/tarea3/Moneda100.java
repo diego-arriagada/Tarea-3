@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase Moneda100 que se desprende de Moneda.
  *
@@ -6,7 +8,7 @@
  * @author Matias Catril
  * @version 1.0
  */
-class Moneda100 extends Moneda {
+public class Moneda100 extends Moneda {
     public Moneda100() {
         super();
     }

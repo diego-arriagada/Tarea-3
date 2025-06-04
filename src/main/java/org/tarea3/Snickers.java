@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase Snickers que se desprende de Dulce.
  *

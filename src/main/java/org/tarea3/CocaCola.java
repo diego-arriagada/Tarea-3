@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase CocaCola que se desprende de Bebida.
  *

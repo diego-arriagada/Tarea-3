@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase abstracta Bebida que se desprende de Producto.
  *

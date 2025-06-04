@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * La clase `Expendedor` representa una máquina expendedora que gestiona la lógica
  * para dispensar productos y manejar pagos.
@@ -10,13 +12,15 @@
  * @author Matias Catril
  * @version 1.0
  */
-class Expendedor {
+public class Expendedor {
     private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
     private Deposito<Producto> fanta;
     private Deposito<Producto> snicker;
     private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
+    private Wallet walletDeposito;
+    private int valorMonedasIngresadas;
 
     /**
      * Construye un `Expendedor` con el número especificado de productos para cada tipo.
@@ -52,18 +56,28 @@ class Expendedor {
      * Si el pago es insuficiente, el producto está agotado o el tipo de producto
      * es inválido, la moneda se devuelve al depósito de monedas.
      *
-     * @param m    la moneda utilizada para el pago
+     * @param  walletDeposito  el almacen de monedas ingresadas del expendedor
      * @param cual el tipo de producto a comprar (por ejemplo, `COCA`, `SPRITE`)
      * @return el producto comprado, o `null` si la compra falla
      */
-    public Producto comprarProducto(Moneda m, int cual) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
-        if (m == null){
-            throw new PagoIncorrectoException();
-        }
 
+    public void compradorMoneda(Moneda m){
+        walletDeposito.addMoneda(m);
+        this.valorMonedasIngresadas = walletDeposito.getvalorWallet();
+    }
+
+    public int getValorMonedasIngresadas(){
+        return this.valorMonedasIngresadas;
+    }
+    public void restarCompra(int valor){
+        this.valorMonedasIngresadas = this.valorMonedasIngresadas - valor;
+    }
+
+    public Producto compraDeProducto(int cual) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+        int dinero = getValorMonedasIngresadas();
 
         Deposito<Producto> depositoSeleccionado = null;
-        double precioProducto = 0;
+        int precioProducto = 0;
 
         switch (cual) {
             case COCA:
@@ -87,28 +101,22 @@ class Expendedor {
                 precioProducto = PreciosProductos.SUPER8.getPrecio();
                 break;
             default:
-                monVu.addObjeto(m); // Devuelve la moneda si no existe el producto
                 throw new NoHayProductoException();
         }
-        if (m.getValor()<precioProducto){
-            monVu.addObjeto(m); //Devuelve la moneda si no alcanza
+        if (dinero<precioProducto){
             throw new PagoInsuficienteException();
         }
 
         Producto producto = depositoSeleccionado.getObjeto();
         if (producto == null){
-            monVu.addObjeto(m); //Devuelve la moneda si no hay stock
             throw new NoHayProductoException();
         }
 
-        
-        // Calcula el vuelto
-        int vuelto = (int)(m.getValor() - precioProducto);
 
-        while (vuelto > 0) {
-            monVu.addObjeto(new Moneda100());
-            vuelto -= 100;
-        }
+
+
+        restarCompra(precioProducto);
+        this.walletDeposito.vaciarWallet();
 
         return producto;
     }
@@ -118,6 +126,25 @@ class Expendedor {
      *
      * @return una moneda del depósito de monedas, o `null` si no hay monedas disponibles
      */
+
+    public void crearVuelto(){
+        while (this.valorMonedasIngresadas > 0) {
+            if (this.valorMonedasIngresadas >= 1000) {
+                monVu.addObjeto(new Moneda1000());
+                this.valorMonedasIngresadas -= 1000;
+            } else if (this.valorMonedasIngresadas >= 500) {
+                monVu.addObjeto(new Moneda500());
+                this.valorMonedasIngresadas -= 500;
+            } else if (this.valorMonedasIngresadas >= 100) {
+                monVu.addObjeto(new Moneda100());
+                this.valorMonedasIngresadas -= 100;
+            }
+        }
+    }
+
+    public Boolean hayVuelto(){
+        return !(monVu.deposito.isEmpty());
+    }
     public Moneda getVuelto() {
         return monVu.getObjeto();
     }

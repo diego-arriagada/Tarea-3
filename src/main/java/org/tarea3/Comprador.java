@@ -1,3 +1,4 @@
+package org.tarea3;
 /**
  * Clase Comprador que sirve para simular la compra de un producto en la máquina expendedora.
  *
@@ -6,48 +7,54 @@
  * @author Matias Catril
  * @version 1.0
  */
-class Comprador {
+public class Comprador {
     private String sonidoProducto;
     private int vueltoTotal;
+    private Wallet w;
+    private Deposito<Producto> inventario;
 
-    public Comprador(Moneda m, int cualProducto, Expendedor exp) {
-        Producto producto = null;
-        try {
-            producto = exp.comprarProducto(m, cualProducto); // Intenta comprar la bebida
-        } catch (PagoIncorrectoException e){
-            // Si hay algun problema (por ejemplo, sin saldo o sin bebida), no se asigna bebida
-            producto = null;
-            System.out.println(e.getMessage());
-        } catch (PagoInsuficienteException ex){
-            producto = null;
-            System.out.println(ex.getMessage());
-        } catch (NoHayProductoException exe){
-            producto = null;
-            System.out.println(exe.getMessage());
+    public Comprador(Wallet w) {
+        w.addMoneda(new Moneda1000());
+        w.addMoneda(new Moneda1000());
+        w.addMoneda(new Moneda1000());
+        w.addMoneda(new Moneda1000());
+        w.addMoneda(new Moneda500());
+        w.addMoneda(new Moneda500());
+        w.addMoneda(new Moneda500());
+        w.addMoneda(new Moneda500());
+        w.addMoneda(new Moneda100());
+        w.addMoneda(new Moneda100());
+        w.addMoneda(new Moneda100());
+        w.addMoneda(new Moneda100());
+        w.addMoneda(new Moneda100());
+    }
+
+    public void ingresarMoneda(Expendedor exp,int valorMoneda){
+        switch(valorMoneda){
+            case 1000:
+                exp.compradorMoneda(w.obtenerMoneda(1000));
+                break;
+            case 500:
+                exp.compradorMoneda(w.obtenerMoneda(500));
+                break;
+            case 100:
+                exp.compradorMoneda(w.obtenerMoneda(100));
+                break;
         }
-
-        // Calcula la suma del vuelto entregado por el expendedor
-        vueltoTotal = 0;
-        Moneda vuelto;
-        while ((vuelto = exp.getVuelto()) != null) {
-            vueltoTotal += vuelto.getValor(); // Suma el valor de cada moneda al total
-        }
-
-        if (producto != null) {
-            sonidoProducto = producto.consumir(); // Guarda el sonido de la bebida
-            System.out.println("Compra exitosa de " + sonidoProducto + ", vuelto total = " + cuantoVuelto());
-        } else {
-            sonidoProducto = null;
-        }
-
 
     }
 
-    public int cuantoVuelto() {
-        return vueltoTotal;
+    public void comprarProducto(int cualProducto,Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+        inventario.addObjeto(exp.compraDeProducto(cualProducto));
     }
+
+    public void sacarVuelto(Expendedor exp){
+        while(exp.hayVuelto()){
+            this.w.addMoneda(exp.getVuelto());
+        }
+    }
+
 
     public String queBebiste() {
-        return sonidoProducto;
-    }
+        return sonidoProducto;    }
 }

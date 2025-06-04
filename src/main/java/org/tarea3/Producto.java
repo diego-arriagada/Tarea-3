@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Clase abstracta Producto, que forma la base de la jerarquía de productos.
  *

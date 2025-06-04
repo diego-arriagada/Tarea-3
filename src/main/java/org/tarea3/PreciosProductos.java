@@ -1,3 +1,5 @@
+package org.tarea3;
+
 /**
  * Enumeración que guarda los precios de los productos disponibles en la máquina expendedora.
  *
@@ -13,13 +15,13 @@ public enum PreciosProductos {
     COCA(500),
     FANTA(300);
 
-    private final double precio;
+    private final int precio;
 
-    private PreciosProductos(double precio) {
+    private PreciosProductos(int precio) {
         this.precio = precio;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 }
