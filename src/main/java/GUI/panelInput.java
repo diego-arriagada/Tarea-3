@@ -29,11 +29,11 @@ public class panelInput extends JPanel {
         panelComponentes.setOpaque(false);
         panelComponentes.setLayout(null);
 
-        dinero = new JLabel("$0", JLabel.LEFT);
-        dinero.setFont(new Font("Arial", Font.BOLD, 20));
-        dinero.setForeground(Color.WHITE);
-        dinero.setBounds(10,35,200,50);
-        panelComponentes.add(dinero);
+        this.dinero = new JLabel("$0", JLabel.LEFT);
+        this.dinero.setFont(new Font("Arial", Font.BOLD, 20));
+        this.dinero.setForeground(Color.WHITE);
+        this.dinero.setBounds(10,35,200,50);
+        panelComponentes.add(this.dinero);
 
         JLabel productoSeleccionado = new JLabel("PRODUCTO SELECCIONADO: ",JLabel.CENTER);
         productoSeleccionado.setFont(new Font("Arial", Font.BOLD, 10));
@@ -56,15 +56,12 @@ public class panelInput extends JPanel {
 
         this.botonDevolverMonedas = new JButton("SACAR VUELTO");
         this.botonDevolverMonedas.setBounds(5, 5, 190, 40); // Posición (x,y) y tamaño (ancho,alto)
-
-
         this.botonDevolverMonedas.setOpaque(true);
         this.botonDevolverMonedas.setContentAreaFilled(true);
         this.botonDevolverMonedas.setBorderPainted(true);
         this.botonDevolverMonedas.setBackground(new Color(130, 0, 0));
         this.botonDevolverMonedas.setForeground(Color.WHITE);
         this.botonDevolverMonedas.setFocusPainted(false);
-
         panelComponentes.add(this.botonDevolverMonedas);
 
 
@@ -115,5 +112,11 @@ public class panelInput extends JPanel {
     }
     public JLabel getNotificacion(){
         return notificacion;
+    }
+    public JLabel getDinero(){
+        return dinero;
+    }
+    public JButton getBotonSacarMonedas(){
+        return botonSacarMonedas;
     }
 }

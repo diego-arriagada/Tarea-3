@@ -28,4 +28,7 @@ public class Deposito<T> {
         }
         return null;
     }
+    public ArrayList<T> getDeposito(){
+        return deposito;
+    }
 }

@@ -1,10 +1,9 @@
 package Controladores;
 
 import GUI.panelExpendedor;
-import org.tarea3.DepositoLlenoException;
-import org.tarea3.Expendedor;
-import org.tarea3.NoHayProductoException;
-import org.tarea3.PagoInsuficienteException;
+import org.tarea3.*;
+
+import javax.swing.*;
 
 public class ControladorExpendedor {
     private Expendedor exp;
@@ -18,32 +17,33 @@ public class ControladorExpendedor {
             switch (evt.getPropertyName()) {
                 case "Valor Monedas":
                     panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
-                    break;
                 case "Producto en Deposito":
                     panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
                 case "Hay Vuelto":
                     panelExp.getPanelInput().mostrarVuelto(evt.getNewValue());
+                case "Producto para Retiro":
+                    panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
             }
         });
         panelExp.getPanSelProd().getBotonCoca().addActionListener(e -> {
             exp.setProductoSeleccionado(0);
-            panelExp.getPanelInput().getProducto().setText("COCA COLA");
+            panelExp.getPanelInput().getProducto().setText("COCA COLA ($500)");
         });
         panelExp.getPanSelProd().getBotonSprite().addActionListener(e -> {
             exp.setProductoSeleccionado(1);
-            panelExp.getPanelInput().getProducto().setText("SPRITE");
+            panelExp.getPanelInput().getProducto().setText("SPRITE ($400)");
         });
         panelExp.getPanSelProd().getBotonFanta().addActionListener(e -> {
             exp.setProductoSeleccionado(2);
-            panelExp.getPanelInput().getProducto().setText("FANTA");
+            panelExp.getPanelInput().getProducto().setText("FANTA ($300)");
         });
         panelExp.getPanSelProd().getBotonSnickers().addActionListener(e -> {
             exp.setProductoSeleccionado(3);
-            panelExp.getPanelInput().getProducto().setText("SNICKERS");
+            panelExp.getPanelInput().getProducto().setText("SNICKERS ($200)");
         });
         panelExp.getPanSelProd().getBotonSuper8().addActionListener(e -> {
             exp.setProductoSeleccionado(4);
-            panelExp.getPanelInput().getProducto().setText("SUPER 8");
+            panelExp.getPanelInput().getProducto().setText("SUPER 8 ($100)");
         });
         panelExp.getPanelInput().getBotonComprar().addActionListener(e -> {
             try{
@@ -64,9 +64,31 @@ public class ControladorExpendedor {
         panelExp.getPanelOut().getProductoComprado().addActionListener(e -> {
             try {
                 exp.getProductoComprado();
+                panelExp.getPanelInput().getNotificacion().setText("PRODUCTO RETIRADO");
             }catch (Exception ex){
-                panelExp.getPanelInput().getNotificacion().setText("NO HAY PRODUCTO PARA RETIRAR");
-                panelExp.getPanelInput().mostrarCambios(e.ge);
+                if (ex instanceof DepositoVacioException){
+                    panelExp.getPanelInput().getNotificacion().setText("NO HAY PRODUCTO PARA RETIRAR");
+                }
+
+            }
+        });
+        panelExp.getPanelInput().getBotonDevolverMonedas().addActionListener(e -> {
+            exp.crearVuelto();
+            panelExp.getPanelInput().getDinero().setText("$0");
+            if (!exp.getMonVu().getDeposito().isEmpty()){
+                panelExp.getPanelInput().getBotonSacarMonedas().setIcon(new ImageIcon(getClass().getResource("/img/monedasLleno.png")));
+            }
+        });
+        panelExp.getPanelInput().getBotonSacarMonedas().addActionListener(e -> {
+            //implementar metodo para pasar el vuelto al comprador
+            panelExp.getPanelInput().getBotonSacarMonedas().setIcon(new ImageIcon(getClass().getResource("/img/monedasVacio.png")));
+            if (!exp.getMonVu().getDeposito().isEmpty()){
+                panelExp.getPanelInput().getNotificacion().setText("VUELTO RETIRADO");
+                while (!exp.getMonVu().getDeposito().isEmpty()){
+                    exp.getMonVu().getObjeto();
+                }
+            } else {
+                panelExp.getPanelInput().getNotificacion().setText("NO HAY VUELTO");
             }
         });
     }

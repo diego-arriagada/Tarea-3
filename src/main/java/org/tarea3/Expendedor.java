@@ -129,8 +129,8 @@ public class Expendedor {
         this.ultimaCompra = producto;
         restarCompra(precioProducto);
         this.walletDeposito.vaciarWallet();
-        escuchador.firePropertyChange("Producto en Deposito", productoAnterior, producto);
         this.hayVuelto = hayVuelto();
+        escuchador.firePropertyChange("Producto en Deposito", productoAnterior, producto);
         escuchador.firePropertyChange("Hay Vuelto",hayVueltoAnterior, this.hayVuelto );
 
     }
@@ -174,10 +174,17 @@ public class Expendedor {
         this.productoSeleccionado = productoElegido;
     }
     public Producto getProductoComprado()throws DepositoVacioException{
+        if (this.ultimaCompra == null){
+            throw new DepositoVacioException();
+        }
         Producto productoRetirado = this.ultimaCompra;
         this.ultimaCompra = null;
         escuchador.firePropertyChange("Producto para Retiro", productoRetirado, this.ultimaCompra);
         return productoRetirado;
 
+    }
+
+    public Deposito<Moneda> getMonVu() {
+        return monVu;
     }
 }
