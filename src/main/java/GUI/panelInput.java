@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class panelInput extends JPanel {
     private JLabel dinero;
+    private JLabel producto;
+    private JButton botonDevolverMonedas;
+    private JButton botonComprar;
     public panelInput(){
         super();
         this.setLayout(new BorderLayout());
@@ -34,41 +37,50 @@ public class panelInput extends JPanel {
         productoSeleccionado.setBounds(0,60,150,50);
         panelComponentes.add(productoSeleccionado);
 
-        JLabel producto = new JLabel("COCA COLA",JLabel.LEFT);
-        producto.setFont(new Font("Arial", Font.BOLD, 20));
-        producto.setForeground(Color.WHITE);
-        producto.setBounds(5,70,150,70);
-        panelComponentes.add(producto);
+        this.producto = new JLabel("No hay producto seleccionado",JLabel.LEFT);
+        this.producto.setFont(new Font("Arial", Font.BOLD, 20));
+        this.producto.setForeground(Color.WHITE);
+        this.producto.setBounds(5,70,150,70);
+        panelComponentes.add(this.producto);
 
-        JButton botonDevolverMonedas = new JButton("SACAR VUELTO");
-        botonDevolverMonedas.setBounds(5, 5, 190, 40); // Posición (x,y) y tamaño (ancho,alto)
-
-
-        botonDevolverMonedas.setOpaque(true);
-        botonDevolverMonedas.setContentAreaFilled(true);
-        botonDevolverMonedas.setBorderPainted(true);
-        botonDevolverMonedas.setBackground(new Color(130, 0, 0));
-        botonDevolverMonedas.setForeground(Color.WHITE);
-        botonDevolverMonedas.setFocusPainted(false);
-
-        panelComponentes.add(botonDevolverMonedas);
+        this.botonDevolverMonedas = new JButton("SACAR VUELTO");
+        this.botonDevolverMonedas.setBounds(5, 5, 190, 40); // Posición (x,y) y tamaño (ancho,alto)
 
 
-        JButton botonComprar = new JButton("COMPRAR");
-        botonComprar.setBounds(5, 120, 150, 25);
+        this.botonDevolverMonedas.setOpaque(true);
+        this.botonDevolverMonedas.setContentAreaFilled(true);
+        this.botonDevolverMonedas.setBorderPainted(true);
+        this.botonDevolverMonedas.setBackground(new Color(130, 0, 0));
+        this.botonDevolverMonedas.setForeground(Color.WHITE);
+        this.botonDevolverMonedas.setFocusPainted(false);
 
-        botonComprar.setOpaque(true);
-        botonComprar.setContentAreaFilled(true);
-        botonComprar.setBorderPainted(true);
-        botonComprar.setBackground(new Color(0, 130, 0));
-        botonComprar.setForeground(Color.WHITE);
-        botonComprar.setFocusPainted(false);
+        panelComponentes.add(this.botonDevolverMonedas);
 
-        panelComponentes.add(botonComprar);
+
+        this.botonComprar = new JButton("COMPRAR");
+        this.botonComprar.setBounds(5, 120, 150, 25);
+
+        this.botonComprar.setOpaque(true);
+        this.botonComprar.setContentAreaFilled(true);
+        this.botonComprar.setBorderPainted(true);
+        this.botonComprar.setBackground(new Color(0, 130, 0));
+        this.botonComprar.setForeground(Color.WHITE);
+        this.botonComprar.setFocusPainted(false);
+
+        panelComponentes.add(this.botonComprar);
 
         add(panelComponentes, BorderLayout.CENTER);
     }
     public void mostrarCambios(Object valorActualizado){
         dinero.setText("$"+(int) valorActualizado);
+    }
+    public JButton getBotonComprar(){
+        return this.botonComprar;
+    }
+    public JButton getBotonDevolverMonedas(){
+        return this.botonDevolverMonedas;
+    }
+    public JLabel getProducto(){
+        return producto;
     }
 }

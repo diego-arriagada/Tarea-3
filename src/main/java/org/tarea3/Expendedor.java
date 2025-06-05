@@ -31,6 +31,7 @@ public class Expendedor {
     private int cantFanta;
     private int cantSnickers;
     private int cantSuper8;
+    private int productoSeleccionado;
     /**
      * Construye un `Expendedor` con el número especificado de productos para cada tipo.
      *
@@ -85,17 +86,16 @@ public class Expendedor {
         this.valorMonedasIngresadas = this.valorMonedasIngresadas - valor;
     }
 
-    public Producto compraDeProducto(int cual) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+    public Producto compraDeProducto() throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
             int dinero = getValorMonedasIngresadas();
-
             Deposito<Producto> depositoSeleccionado = null;
             int precioProducto = 0;
 
             PreciosProductos[] productos = PreciosProductos.values();
-            if (cual < 0 || cual >= productos.length) {
+            if (this.productoSeleccionado < 0 || this.productoSeleccionado >= productos.length) {
                 throw new NoHayProductoException();
             }
-            PreciosProductos productoEnum = productos[cual];
+            PreciosProductos productoEnum = productos[this.productoSeleccionado];
 
         depositoSeleccionado = switch (productoEnum) {
             case COCA -> coca;
@@ -155,5 +155,12 @@ public class Expendedor {
     }
     public Moneda getVuelto() {
         return monVu.getObjeto();
+    }
+
+    public int getProductoSeleccionado() {
+        return productoSeleccionado;
+    }
+    public void setProductoSeleccionado(int productoElegido){
+        this.productoSeleccionado = productoElegido;
     }
 }
