@@ -32,6 +32,7 @@ public class Expendedor {
     private int cantSnickers;
     private int cantSuper8;
     private int productoSeleccionado;
+    private boolean hayVuelto;
     /**
      * Construye un `Expendedor` con el número especificado de productos para cada tipo.
      *
@@ -88,10 +89,11 @@ public class Expendedor {
         escuchador.firePropertyChange("Valor Monedas",valorViejo, this.valorMonedasIngresadas);
     }
 
-    public Producto compraDeProducto() throws NoHayProductoException, PagoInsuficienteException{
+    public void compraDeProducto() throws NoHayProductoException, PagoInsuficienteException, DepositoLlenoException{
             int dinero = getValorMonedasIngresadas();
             Deposito<Producto> depositoSeleccionado = null;
             int precioProducto = 0;
+            boolean hayVueltoAnterior = hayVuelto();
 
             PreciosProductos[] productos = PreciosProductos.values();
             if (this.productoSeleccionado < 0 || this.productoSeleccionado >= productos.length) {
@@ -117,14 +119,20 @@ public class Expendedor {
         if (producto == null){
             throw new NoHayProductoException();
         }
+        if (this.ultimaCompra != null){
+            depositoSeleccionado.addObjeto(producto);
+            throw new DepositoLlenoException();
 
+        }
 
         Producto productoAnterior = this.ultimaCompra;
         this.ultimaCompra = producto;
         restarCompra(precioProducto);
         this.walletDeposito.vaciarWallet();
         escuchador.firePropertyChange("Producto en Deposito", productoAnterior, producto);
-        return producto;
+        this.hayVuelto = hayVuelto();
+        escuchador.firePropertyChange("Hay Vuelto",hayVueltoAnterior, this.hayVuelto );
+
     }
 
     /**
@@ -164,5 +172,12 @@ public class Expendedor {
     }
     public void setProductoSeleccionado(int productoElegido){
         this.productoSeleccionado = productoElegido;
+    }
+    public Producto getProductoComprado()throws DepositoVacioException{
+        Producto productoRetirado = this.ultimaCompra;
+        this.ultimaCompra = null;
+        escuchador.firePropertyChange("Producto para Retiro", productoRetirado, this.ultimaCompra);
+        return productoRetirado;
+
     }
 }

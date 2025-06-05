@@ -1,6 +1,7 @@
 package Controladores;
 
 import GUI.panelExpendedor;
+import org.tarea3.DepositoLlenoException;
 import org.tarea3.Expendedor;
 import org.tarea3.NoHayProductoException;
 import org.tarea3.PagoInsuficienteException;
@@ -20,6 +21,8 @@ public class ControladorExpendedor {
                     break;
                 case "Producto en Deposito":
                     panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
+                case "Hay Vuelto":
+                    panelExp.getPanelInput().mostrarVuelto(evt.getNewValue());
             }
         });
         panelExp.getPanSelProd().getBotonCoca().addActionListener(e -> {
@@ -47,17 +50,24 @@ public class ControladorExpendedor {
                 exp.compraDeProducto();
                 panelExp.getPanelInput().getNotificacion().setText("COMPRA EXITOSA");
 
-            }catch (Exception ex){
-                if (ex instanceof NoHayProductoException){
+            }catch (Exception ex) {
+                if (ex instanceof NoHayProductoException) {
                     panelExp.getPanelInput().getNotificacion().setText("PRODUCTO AGOTADO");
-                }
-                else if (ex instanceof PagoInsuficienteException){
+                } else if (ex instanceof PagoInsuficienteException) {
                     panelExp.getPanelInput().getNotificacion().setText("DINERO INSUFICIENTE");
+                } else if (ex instanceof DepositoLlenoException) {
+                    panelExp.getPanelInput().getNotificacion().setText("RETIRE PRODUCTO ANTES DE HACER OTRA COMPRA");
                 }
-                }
-
+            }
         });
 
-
+        panelExp.getPanelOut().getProductoComprado().addActionListener(e -> {
+            try {
+                exp.getProductoComprado();
+            }catch (Exception ex){
+                panelExp.getPanelInput().getNotificacion().setText("NO HAY PRODUCTO PARA RETIRAR");
+                panelExp.getPanelInput().mostrarCambios(e.ge);
+            }
+        });
     }
 }

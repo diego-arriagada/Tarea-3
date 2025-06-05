@@ -44,8 +44,9 @@ public class Comprador {
 
     }
 
-    public void comprarProducto(Expendedor exp) throws NoHayProductoException, PagoInsuficienteException{
-        inventario.addObjeto(exp.compraDeProducto());
+    public void comprarProducto(Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, DepositoLlenoException, DepositoVacioException{
+        exp.compraDeProducto();
+        inventario.addObjeto(exp.getProductoComprado());
     }
 
     public void sacarVuelto(Expendedor exp){

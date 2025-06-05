@@ -28,7 +28,12 @@ public class panelOut extends JPanel {
             producto.setIcon(new ImageIcon(getClass().getResource("/img/snickersComprado.png")));
         }else if (productoNuevo instanceof Super8){
             producto.setIcon(new ImageIcon(getClass().getResource("/img/super8Comprada.png")));
+        }else if (productoNuevo == null){
+            producto.setIcon(new ImageIcon(getClass().getResource("/img/vacio.png")));
         }
 
+    }
+    public JButton getProductoComprado(){
+        return producto;
     }
 }
