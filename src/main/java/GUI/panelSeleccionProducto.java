@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import org.tarea3.*;
 
 public class panelSeleccionProducto extends JPanel {
     public panelSeleccionProducto(){
@@ -31,5 +32,8 @@ public class panelSeleccionProducto extends JPanel {
         super8Boton.setPreferredSize(new Dimension(80,120));
         this.add(super8Boton);
 
+    }
+    public Button getBoton(){
+        return
     }
 }

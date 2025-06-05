@@ -27,4 +27,10 @@ public class panelExpendedor extends JPanel{
     public panelInput getPanelInput(){
         return pI;
     }
+    public panelOut getPanelOut(){
+        return pOut;
+    }
+    public panelSeleccionProducto getPanSelProd(){
+        return pSP;
+    }
 }

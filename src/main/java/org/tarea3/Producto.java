@@ -8,7 +8,7 @@ package org.tarea3;
  * @author Matias Catril
  * @version 1.0
  */
-abstract class Producto {
+public abstract class Producto {
     private int serie;
     public Producto(int x){
         this.serie = x;

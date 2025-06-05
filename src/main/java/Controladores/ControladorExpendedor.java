@@ -13,7 +13,13 @@ public class ControladorExpendedor {
         this.panelExp = panelExpend;
 
     exp.addPropertyChangeListener(evt -> {
-        panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+        switch (evt.getPropertyName()){
+            case "Valor Monedas":
+                panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+                break;
+            case "Producto en Deposito":
+                panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
+        }
         });
     }
 
