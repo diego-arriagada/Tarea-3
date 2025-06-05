@@ -49,10 +49,10 @@ public class ControladorExpendedor {
 
             }catch (Exception ex){
                 if (ex instanceof NoHayProductoException){
-                    panelExp.getPanelInput().getNotificacion().setText("NO HAY DEL PRODUCTO SELECCIONADO");
+                    panelExp.getPanelInput().getNotificacion().setText("PRODUCTO AGOTADO");
                 }
                 else if (ex instanceof PagoInsuficienteException){
-                    panelExp.getPanelInput().getNotificacion().setText("DINERO INSUFICIENTE PARA LA COMPRA SELECCIONADA");
+                    panelExp.getPanelInput().getNotificacion().setText("DINERO INSUFICIENTE");
                 }
                 }
 

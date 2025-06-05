@@ -26,10 +26,10 @@ public class panelInput extends JPanel {
         panelComponentes.setOpaque(false);
         panelComponentes.setLayout(null);
 
-        dinero = new JLabel("$0", JLabel.CENTER);
+        dinero = new JLabel("$0", JLabel.LEFT);
         dinero.setFont(new Font("Arial", Font.BOLD, 20));
         dinero.setForeground(Color.WHITE);
-        dinero.setBounds(10,35,50,50);
+        dinero.setBounds(10,35,200,50);
         panelComponentes.add(dinero);
 
         JLabel productoSeleccionado = new JLabel("PRODUCTO SELECCIONADO: ",JLabel.CENTER);
@@ -38,17 +38,17 @@ public class panelInput extends JPanel {
         productoSeleccionado.setBounds(0,60,150,50);
         panelComponentes.add(productoSeleccionado);
 
-        this.notificacion = new JLabel("Esperando compra...", JLabel.CENTER);
-        this.notificacion.setFont(new Font("Arial", Font.BOLD, 20));
+        this.notificacion = new JLabel("Esperando compra...", JLabel.LEFT);
+        this.notificacion.setFont(new Font("Arial", Font.BOLD, 10));
         this.notificacion.setForeground(Color.WHITE);
-        this.notificacion.setBounds(5,120,150,70);
+        this.notificacion.setBounds(5,120,200,70);
         panelComponentes.add(this.notificacion);
 
 
         this.producto = new JLabel("No hay producto seleccionado",JLabel.LEFT);
-        this.producto.setFont(new Font("Arial", Font.BOLD, 20));
+        this.producto.setFont(new Font("Arial", Font.BOLD, 12));
         this.producto.setForeground(Color.WHITE);
-        this.producto.setBounds(5,70,150,70);
+        this.producto.setBounds(5,70,200,70);
         panelComponentes.add(this.producto);
 
         this.botonDevolverMonedas = new JButton("SACAR VUELTO");
