@@ -6,6 +6,7 @@ import java.awt.*;
 public class panelInput extends JPanel {
     private JLabel dinero;
     private JLabel producto;
+    private JLabel notificacion;
     private JButton botonDevolverMonedas;
     private JButton botonComprar;
     public panelInput(){
@@ -36,6 +37,13 @@ public class panelInput extends JPanel {
         productoSeleccionado.setForeground(Color.WHITE);
         productoSeleccionado.setBounds(0,60,150,50);
         panelComponentes.add(productoSeleccionado);
+
+        this.notificacion = new JLabel("Esperando compra...", JLabel.CENTER);
+        this.notificacion.setFont(new Font("Arial", Font.BOLD, 20));
+        this.notificacion.setForeground(Color.WHITE);
+        this.notificacion.setBounds(5,120,150,70);
+        panelComponentes.add(this.notificacion);
+
 
         this.producto = new JLabel("No hay producto seleccionado",JLabel.LEFT);
         this.producto.setFont(new Font("Arial", Font.BOLD, 20));
@@ -82,5 +90,8 @@ public class panelInput extends JPanel {
     }
     public JLabel getProducto(){
         return producto;
+    }
+    public JLabel getNotificacion(){
+        return notificacion;
     }
 }

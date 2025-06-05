@@ -83,10 +83,12 @@ public class Expendedor {
         return this.valorMonedasIngresadas;
     }
     public void restarCompra(int valor){
+        int valorViejo = this.valorMonedasIngresadas;
         this.valorMonedasIngresadas = this.valorMonedasIngresadas - valor;
+        escuchador.firePropertyChange("Valor Monedas",valorViejo, this.valorMonedasIngresadas);
     }
 
-    public Producto compraDeProducto() throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+    public Producto compraDeProducto() throws NoHayProductoException, PagoInsuficienteException{
             int dinero = getValorMonedasIngresadas();
             Deposito<Producto> depositoSeleccionado = null;
             int precioProducto = 0;
