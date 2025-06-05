@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import org.tarea3.Deposito;
+import org.tarea3.Moneda;
 
 public class panelInput extends JPanel {
     private JLabel dinero;
@@ -9,6 +11,7 @@ public class panelInput extends JPanel {
     private JLabel notificacion;
     private JButton botonDevolverMonedas;
     private JButton botonComprar;
+    private JButton botonSacarMonedas;
     public panelInput(){
         super();
         this.setLayout(new BorderLayout());
@@ -77,11 +80,30 @@ public class panelInput extends JPanel {
 
         panelComponentes.add(this.botonComprar);
 
+        ImageIcon monedaVaciaIcon = new ImageIcon(getClass().getResource("/img/monedasVacio.png"));
+
+        this.botonSacarMonedas = new JButton(monedaVaciaIcon);
+        this.botonSacarMonedas.setBounds(115, 315, 80, 80); // Posición (x,y) y tamaño (ancho,alto)
+
+        this.botonSacarMonedas.setOpaque(true);
+        this.botonSacarMonedas.setContentAreaFilled(true);
+        this.botonSacarMonedas.setBorderPainted(true);
+        this.botonSacarMonedas.setBackground(new Color(130, 0, 0));
+        this.botonSacarMonedas.setForeground(Color.WHITE);
+        this.botonSacarMonedas.setFocusPainted(false);
+
+        panelComponentes.add(this.botonSacarMonedas);
+
         add(panelComponentes, BorderLayout.CENTER);
     }
     public void mostrarCambios(Object valorActualizado){
         dinero.setText("$"+(int) valorActualizado);
     }
+
+    public void mostrarVuelto(Object objeto){
+        botonSacarMonedas.setIcon(new ImageIcon(getClass().getResource("/img/monedasVacio.png")));
+    }
+
     public JButton getBotonComprar(){
         return this.botonComprar;
     }
