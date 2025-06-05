@@ -60,12 +60,6 @@ public class Expendedor {
         cantSuper8 = super8.deposito.size();
     }
 
-    public static final int COCA = 1;
-    public static final int SPRITE = 2;
-    public static final int FANTA = 3;
-    public static final int SNICKERS = 4;
-    public static final int SUPER8 = 5;
-
     /**
      * Intenta comprar un producto de la máquina expendedora.
      *
@@ -92,35 +86,27 @@ public class Expendedor {
     }
 
     public Producto compraDeProducto(int cual) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
-        int dinero = getValorMonedasIngresadas();
+            int dinero = getValorMonedasIngresadas();
 
-        Deposito<Producto> depositoSeleccionado = null;
-        int precioProducto = 0;
+            Deposito<Producto> depositoSeleccionado = null;
+            int precioProducto = 0;
 
-        switch (cual) {
-            case COCA:
-                depositoSeleccionado = coca;
-                precioProducto = PreciosProductos.COCA.getPrecio();
-                break;
-            case SPRITE:
-                depositoSeleccionado = sprite;
-                precioProducto = PreciosProductos.SPRITE.getPrecio();
-                break;
-            case FANTA:
-                depositoSeleccionado = fanta;
-                precioProducto = PreciosProductos.FANTA.getPrecio();
-                break;
-            case SNICKERS:
-                depositoSeleccionado = snicker;
-                precioProducto = PreciosProductos.SNICKERS.getPrecio();
-                break;
-            case SUPER8:
-                depositoSeleccionado = super8;
-                precioProducto = PreciosProductos.SUPER8.getPrecio();
-                break;
-            default:
+            PreciosProductos[] productos = PreciosProductos.values();
+            if (cual < 0 || cual >= productos.length) {
                 throw new NoHayProductoException();
-        }
+            }
+            PreciosProductos productoEnum = productos[cual];
+
+        depositoSeleccionado = switch (productoEnum) {
+            case COCA -> coca;
+            case SPRITE -> sprite;
+            case FANTA -> fanta;
+            case SNICKERS -> snicker;
+            case SUPER8 -> super8;
+            default -> throw new NoHayProductoException();
+        };
+        precioProducto = productoEnum.getPrecio();
+
         if (dinero<precioProducto){
             throw new PagoInsuficienteException();
         }

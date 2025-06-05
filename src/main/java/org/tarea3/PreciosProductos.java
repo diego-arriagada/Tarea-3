@@ -9,15 +9,15 @@ package org.tarea3;
  * @version 1.0
  */
 public enum PreciosProductos {
-    SNICKERS(200),
-    SUPER8(100),
-    SPRITE(400),
     COCA(500),
-    FANTA(300);
+    SPRITE(400),
+    FANTA(300),
+    SNICKERS(200),
+    SUPER8(100);
 
     private final int precio;
 
-    private PreciosProductos(int precio) {
+    PreciosProductos(int precio) {
         this.precio = precio;
     }
 
