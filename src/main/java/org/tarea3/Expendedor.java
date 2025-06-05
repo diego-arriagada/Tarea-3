@@ -1,5 +1,8 @@
 package org.tarea3;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  * La clase `Expendedor` representa una máquina expendedora que gestiona la lógica
  * para dispensar productos y manejar pagos.
@@ -21,7 +24,8 @@ public class Expendedor {
     private Deposito<Moneda> monVu;
     private Wallet walletDeposito;
     private int valorMonedasIngresadas;
-
+    private PropertyChangeSupport escuchador;
+    private Producto ultimaCompra;
     /**
      * Construye un `Expendedor` con el número especificado de productos para cada tipo.
      *
@@ -34,7 +38,9 @@ public class Expendedor {
         snicker = new Deposito<>();
         super8 = new Deposito<>();
         monVu = new Deposito<>();
-
+        this.ultimaCompra = null;
+        this.walletDeposito = new Wallet();
+        this.escuchador = new PropertyChangeSupport(this);
         for (int i = 0; i < numProductos; i++) {
             coca.addObjeto(new CocaCola(100 + i));
             sprite.addObjeto(new Sprite(200 + i));
@@ -63,7 +69,9 @@ public class Expendedor {
 
     public void compradorMoneda(Moneda m){
         walletDeposito.addMoneda(m);
+        int valorViejo = this.valorMonedasIngresadas;
         this.valorMonedasIngresadas = walletDeposito.getvalorWallet();
+        escuchador.firePropertyChange("Valor Monedas",valorViejo, this.valorMonedasIngresadas);
     }
 
     public int getValorMonedasIngresadas(){
@@ -140,6 +148,10 @@ public class Expendedor {
                 this.valorMonedasIngresadas -= 100;
             }
         }
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        escuchador.addPropertyChangeListener(listener);
     }
 
     public Boolean hayVuelto(){

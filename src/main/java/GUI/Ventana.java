@@ -3,7 +3,10 @@ package GUI;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
+
 public class Ventana extends JFrame {
+    private panelExpendedor pE;
+    private panelComprador pC;
     public Ventana(){
         this.setTitle("Maquina Expendedora");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -12,13 +15,21 @@ public class Ventana extends JFrame {
 
         this.setLayout(new BorderLayout());
 
-        panelExpendedor pE = new panelExpendedor();
+        this.pE = new panelExpendedor();
         this.add(pE,BorderLayout.CENTER);
 
-        panelComprador pC = new panelComprador();
+        this.pC = new panelComprador();
         this.add(pC,BorderLayout.EAST);
+        pack();
 
         this.setVisible(true);
+        setResizable(false);
 
+    }
+    public panelExpendedor getpE(){
+        return pE;
+    }
+    public panelComprador getpC(){
+        return pC;
     }
 }

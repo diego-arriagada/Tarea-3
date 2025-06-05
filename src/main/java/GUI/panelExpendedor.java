@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import Controladores.ControladorExpendedor;
 
 public class panelExpendedor extends JPanel{
     private panelSeleccionProducto pSP;
@@ -22,5 +23,8 @@ public class panelExpendedor extends JPanel{
         pOut = new panelOut();
         this.add(pOut,BorderLayout.SOUTH);
 
+    }
+    public panelInput getPanelInput(){
+        return pI;
     }
 }

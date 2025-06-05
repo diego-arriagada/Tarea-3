@@ -6,7 +6,7 @@ public class Wallet{
 
     public Wallet(){
         this.ValorWallet = 0;
-        Deposito<Moneda> deposito = new Deposito<Moneda>();
+        this.deposito = new Deposito<Moneda>();
 
     }
 
