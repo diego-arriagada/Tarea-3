@@ -26,6 +26,11 @@ public class Expendedor {
     private int valorMonedasIngresadas;
     private PropertyChangeSupport escuchador;
     private Producto ultimaCompra;
+    private int cantCoca;
+    private int cantSprite;
+    private int cantFanta;
+    private int cantSnickers;
+    private int cantSuper8;
     /**
      * Construye un `Expendedor` con el número especificado de productos para cada tipo.
      *
@@ -48,6 +53,11 @@ public class Expendedor {
             snicker.addObjeto(new Snickers(400 + i));
             super8.addObjeto(new Super8(500 + i));
         }
+        cantCoca = coca.deposito.size();
+        cantFanta = fanta.deposito.size();
+        cantSprite = sprite.deposito.size();
+        cantSnickers = snicker.deposito.size();
+        cantSuper8 = super8.deposito.size();
     }
 
     public static final int COCA = 1;
@@ -121,11 +131,11 @@ public class Expendedor {
         }
 
 
-
-
+        Producto productoAnterior = this.ultimaCompra;
+        this.ultimaCompra = producto;
         restarCompra(precioProducto);
         this.walletDeposito.vaciarWallet();
-
+        escuchador.firePropertyChange("Producto en Deposito", productoAnterior, producto);
         return producto;
     }
 
