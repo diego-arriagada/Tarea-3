@@ -14,9 +14,9 @@ public class VentanaInventario extends JFrame {
     private DefaultListModel<Producto> modeloInventario;
     private Wallet wallet;
 
-    public VentanaInventario(Comprador comp,DefaultListModel<Producto> modelo,Wallet wallet){
+    public VentanaInventario(Comprador comp,DefaultListModel<Producto> modelo){
         this.modeloInventario = modelo;
-        this.wallet = wallet;
+
 
         this.setTitle("Inventario");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -25,13 +25,13 @@ public class VentanaInventario extends JFrame {
         this.setLayout(new BorderLayout());
 
 
-        JList<Producto> listaProductos = new JList<>(modelo);
+        JList<Producto> listaProductos = new JList<>(modeloInventario);
         add(new JScrollPane(listaProductos),BorderLayout.CENTER);
         JButton botonConsumir = new JButton("CONSUMIR");
         botonConsumir.addActionListener(e -> {
             Producto p = listaProductos.getSelectedValue();
             if (p != null) {
-                System.out.println("Usando: " + p.consumir());
+                System.out.println("Consumiendo: " + p.consumir());
                 comp.consumirProducto(p);
             } else {
                 JOptionPane.showMessageDialog(null, "Selecciona un producto primero");

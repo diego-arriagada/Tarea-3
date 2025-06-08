@@ -63,14 +63,12 @@ public class Comprador {
 
     public void comprarProducto(Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, DepositoLlenoException, DepositoVacioException{
         exp.compraDeProducto();
-        inventario.addObjeto(exp.getProductoComprado());
-        Producto producto = exp.getProductoComprado();
-        modeloInventario.addElement(producto);
+        this.añadirProducto(exp,exp.getProductoComprado());
     }
 
     public void añadirProducto(Expendedor exp,Producto producto) throws DepositoVacioException {
         getInventario().addObjeto(producto);
-        modeloInventario.addElement(producto);
+        getModeloInventario().addElement(producto);
     }
     public void consumirProducto(Producto p){
         inventario.eliminarObjeto(p);

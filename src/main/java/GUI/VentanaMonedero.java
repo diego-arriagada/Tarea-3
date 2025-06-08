@@ -15,8 +15,8 @@ public class VentanaMonedero extends JFrame {
     private DefaultListModel<Moneda> modeloWallet;
     private Wallet wallet;
 
-    public VentanaMonedero(Comprador comp,Wallet wallet,DefaultListModel<Moneda> modeloWallet,Expendedor exp){
-        this.modeloWallet = modeloWallet;
+    public VentanaMonedero(Comprador comp,Wallet wallet,DefaultListModel<Moneda> modelo,Expendedor exp){
+        this.modeloWallet = modelo;
         this.wallet = wallet;
 
         this.setTitle("Monedero");

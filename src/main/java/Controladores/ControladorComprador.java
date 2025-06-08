@@ -13,14 +13,13 @@ import javax.swing.*;
 public class ControladorComprador {
     private Comprador comp;
     private panelComprador pComp;
-    private DefaultListModel<Producto> modeloInventario = new DefaultListModel<Producto>();
 
     public ControladorComprador(Comprador comprador, panelComprador panelComp, Wallet wComp, Expendedor exp){
         this.comp = comprador;
         this.pComp = panelComp;
 
         pComp.getBotonInventario().addActionListener(e -> {
-            VentanaInventario inventario = new VentanaInventario(comp,comp.getModeloInventario(),comp.getWallet());
+            VentanaInventario inventario = new VentanaInventario(comp,comp.getModeloInventario());
             inventario.setVisible(true);
         });
 
@@ -32,7 +31,5 @@ public class ControladorComprador {
     public Comprador getComprador(){
         return comp;
     }
-    public DefaultListModel<Producto> getModeloInventario(){
-        return modeloInventario;
-    }
+
 }

@@ -17,14 +17,19 @@ public class ControladorExpendedor {
             switch (evt.getPropertyName()) {
                 case "Valor Monedas":
                     panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+                    break;
                 case "Producto en Deposito":
                     panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
+                    break;
                 case "Hay Vuelto":
                     panelExp.getPanelInput().mostrarVuelto(evt.getNewValue());
+                    break;
                 case "Producto para Retiro":
                     panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
+                    break;
                 case "vuelto":
                     panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+                    break;
 
             }
         });
@@ -60,6 +65,8 @@ public class ControladorExpendedor {
                     panelExp.getPanelInput().getNotificacion().setText("DINERO INSUFICIENTE");
                 } else if (ex instanceof DepositoLlenoException) {
                     panelExp.getPanelInput().getNotificacion().setText("RETIRE PRODUCTO ANTES DE HACER OTRA COMPRA");
+                } else{
+                    ex.printStackTrace();
                 }
             }
         });
