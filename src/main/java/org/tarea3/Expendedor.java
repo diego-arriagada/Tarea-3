@@ -16,6 +16,7 @@ import java.beans.PropertyChangeSupport;
  * @version 1.0
  */
 public class Expendedor {
+    private int numProductosInicial;
     private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
     private Deposito<Producto> fanta;
@@ -23,6 +24,7 @@ public class Expendedor {
     private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
     private Wallet walletDeposito;
+    private Wallet monedasAlmacenadas;
     private int valorMonedasIngresadas = 0;
     private PropertyChangeSupport escuchador;
     private Producto ultimaCompra;
@@ -39,6 +41,7 @@ public class Expendedor {
      * @param numProductos el número de productos a inicializar en cada depósito
      */
     public Expendedor(int numProductos) {
+        this.numProductosInicial = numProductos;
         coca = new Deposito<>();
         sprite = new Deposito<>();
         fanta = new Deposito<>();
@@ -77,7 +80,6 @@ public class Expendedor {
         walletDeposito.addMoneda(m);
         int valorViejo = getValorMonedasIngresadas();
         this.valorMonedasIngresadas = walletDeposito.getvalorWallet();
-        this.walletDeposito.vaciarWallet();
         escuchador.firePropertyChange("Valor Monedas",valorViejo, this.getValorMonedasIngresadas());
     }
 
@@ -129,6 +131,21 @@ public class Expendedor {
         Producto productoAnterior = this.ultimaCompra;
         this.ultimaCompra = producto;
         restarCompra(precioProducto);
+        if(productoSeleccionado == 0){
+            cantCoca -= 1;
+        }else if(productoSeleccionado == 1){
+            cantSprite -= 1;
+        }
+        else if(productoSeleccionado == 2){
+            cantFanta -=1;
+        }
+        else if(productoSeleccionado == 3){
+            cantSnickers -=1;
+        }
+        else if(productoSeleccionado == 4){
+            cantSuper8 -= 1;
+        }
+
         this.hayVuelto = hayVuelto();
         escuchador.firePropertyChange("Producto en Deposito", productoAnterior, producto);
         escuchador.firePropertyChange("Hay Vuelto",hayVueltoAnterior, this.hayVuelto );
@@ -195,5 +212,27 @@ public class Expendedor {
 
     public Deposito<Moneda> getMonVu() {
         return monVu;
+    }
+
+    public int getCantidad(int productoSeleccionado){
+        if(productoSeleccionado == 0){
+            return cantCoca;
+        }else if(productoSeleccionado == 1){
+            return cantSprite;
+        }
+        else if(productoSeleccionado == 2){
+            return cantFanta;
+        }
+        else if(productoSeleccionado == 3){
+            return cantSnickers;
+        }
+        else if(productoSeleccionado == 4){
+            return cantSuper8;
+        }
+        else return -1;
+    }
+
+    public int getNumProductosInicial() {
+        return numProductosInicial;
     }
 }

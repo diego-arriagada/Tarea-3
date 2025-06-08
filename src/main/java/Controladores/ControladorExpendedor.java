@@ -12,6 +12,7 @@ public class ControladorExpendedor {
     public ControladorExpendedor(Expendedor expend,Comprador comp, panelExpendedor panelExpend,ControladorComprador conCompr) {
         this.exp = expend;
         this.panelExp = panelExpend;
+        this.panelExp.getPanSelProd().setStockInicial(exp.getNumProductosInicial());
 
         exp.addPropertyChangeListener(evt -> {
             switch (evt.getPropertyName()) {
@@ -29,6 +30,9 @@ public class ControladorExpendedor {
                     break;
                 case "vuelto":
                     panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+                    break;
+                case "stock":
+                    panelExp.getPanSelProd().mostrarCambios(evt.getNewValue());
                     break;
 
             }
@@ -56,6 +60,7 @@ public class ControladorExpendedor {
         panelExp.getPanelInput().getBotonComprar().addActionListener(e -> {
             try{
                 exp.compraDeProducto();
+                panelExpend.getPanSelProd().setStock(exp.getProductoSeleccionado(),exp.getCantidad(exp.getProductoSeleccionado()));
                 panelExp.getPanelInput().getNotificacion().setText("COMPRA EXITOSA");
 
             }catch (Exception ex) {
@@ -75,7 +80,6 @@ public class ControladorExpendedor {
             try {
                 comp.añadirProducto(exp,exp.getProductoComprado());
                 panelExp.getPanelInput().getNotificacion().setText("PRODUCTO RETIRADO");
-                System.out.println(comp.getInventario().getDeposito().size());
             }catch (Exception ex){
                 if (ex instanceof DepositoVacioException){
                     panelExp.getPanelInput().getNotificacion().setText("NO HAY PRODUCTO PARA RETIRAR");
@@ -85,6 +89,7 @@ public class ControladorExpendedor {
         });
         panelExp.getPanelInput().getBotonDevolverMonedas().addActionListener(e -> {
             panelExp.getPanelInput().getDinero().setText("$0");
+            exp.getWallet().vaciarWallet();
             exp.crearVuelto();
             if (!exp.getMonVu().getDeposito().isEmpty()){
                 panelExp.getPanelInput().getBotonSacarMonedas().setIcon(new ImageIcon(getClass().getResource("/img/monedasLleno.png")));
