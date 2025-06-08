@@ -1,0 +1,50 @@
+package GUI;
+
+import org.tarea3.Deposito;
+import org.tarea3.Moneda;
+import org.tarea3.Producto;
+import org.tarea3.Wallet;
+import org.tarea3.Moneda100;
+import org.tarea3.Comprador;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class VentanaInventario extends JFrame {
+    private DefaultListModel<Producto> modeloInventario;
+    private Wallet wallet;
+
+    public VentanaInventario(Comprador comp,DefaultListModel<Producto> modelo,Wallet wallet){
+        this.modeloInventario = modelo;
+        this.wallet = wallet;
+
+        this.setTitle("Inventario");
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(400,300);
+        this.setResizable(false);
+        this.setLayout(new BorderLayout());
+
+
+        JList<Producto> listaProductos = new JList<>(modelo);
+        add(new JScrollPane(listaProductos),BorderLayout.CENTER);
+        JButton botonConsumir = new JButton("CONSUMIR");
+        botonConsumir.addActionListener(e -> {
+            Producto p = listaProductos.getSelectedValue();
+            if (p != null) {
+                System.out.println("Usando: " + p.consumir());
+                comp.consumirProducto(p);
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecciona un producto primero");
+            }
+        });
+
+
+        JPanel panelInferior = new JPanel();
+        panelInferior.add(botonConsumir);
+        add(panelInferior,BorderLayout.SOUTH);
+
+
+        this.setVisible(false);
+    }
+
+}

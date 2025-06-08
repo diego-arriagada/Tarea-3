@@ -18,4 +18,8 @@ public class Fanta extends Bebida {
     public double getPrecio() {
         return PreciosProductos.FANTA.getPrecio();
     }
+    @Override
+    public String toString(){
+        return "fanta";
+    }
 }

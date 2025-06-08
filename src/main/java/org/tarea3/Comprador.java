@@ -1,4 +1,7 @@
 package org.tarea3;
+
+import javax.swing.*;
+
 /**
  * Clase Comprador que sirve para simular la compra de un producto en la máquina expendedora.
  *
@@ -12,8 +15,14 @@ public class Comprador {
     private int vueltoTotal;
     private Wallet w;
     private Deposito<Producto> inventario;
+    private DefaultListModel<Producto> modeloInventario = new DefaultListModel<>();
+    private DefaultListModel<Moneda> modeloMonedero = new DefaultListModel<>();
+
+
 
     public Comprador(Wallet w) {
+        this.inventario = new Deposito<Producto>();
+        this.w = w;
         w.addMoneda(new Moneda1000());
         w.addMoneda(new Moneda1000());
         w.addMoneda(new Moneda1000());
@@ -27,35 +36,66 @@ public class Comprador {
         w.addMoneda(new Moneda100());
         w.addMoneda(new Moneda100());
         w.addMoneda(new Moneda100());
+        sincronizarModelo();
     }
 
-    public void ingresarMoneda(Expendedor exp,int valorMoneda){
-        switch(valorMoneda){
-            case 1000:
-                exp.compradorMoneda(w.obtenerMoneda(1000));
-                break;
-            case 500:
-                exp.compradorMoneda(w.obtenerMoneda(500));
-                break;
-            case 100:
-                exp.compradorMoneda(w.obtenerMoneda(100));
-                break;
+    private void sincronizarModelo() {
+        modeloInventario.clear();
+        modeloMonedero.clear();
+        for (Producto p : inventario.getDeposito()) {
+            modeloInventario.addElement(p);
+            System.out.println("Elemento nuevo en inventario");
         }
+        for(Moneda m : w.getDepositoMoneda().getDeposito()){
+            modeloMonedero.addElement(m);
+        }
+    }
+    public DefaultListModel<Producto> getModeloInventario(){
+        return modeloInventario;
+    }
+    public DefaultListModel<Moneda> getModeloMonedero(){
+        return modeloMonedero;
+    }
 
+    public void ingresarMoneda(Moneda m,Expendedor exp){
+        exp.compradorMoneda(m);
     }
 
     public void comprarProducto(Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, DepositoLlenoException, DepositoVacioException{
         exp.compraDeProducto();
         inventario.addObjeto(exp.getProductoComprado());
+        Producto producto = exp.getProductoComprado();
+        modeloInventario.addElement(producto);
+    }
+
+    public void añadirProducto(Expendedor exp,Producto producto) throws DepositoVacioException {
+        getInventario().addObjeto(producto);
+        modeloInventario.addElement(producto);
+    }
+    public void consumirProducto(Producto p){
+        inventario.eliminarObjeto(p);
+        modeloInventario.removeElement(p);
     }
 
     public void sacarVuelto(Expendedor exp){
         while(exp.hayVuelto()){
-            this.w.addMoneda(exp.getVuelto());
+            Moneda m = exp.getVuelto();
+            this.w.addMoneda(m);
+            modeloMonedero.addElement(m);
+
+
+
         }
     }
 
 
     public String queBebiste() {
         return sonidoProducto;    }
+
+    public Deposito<Producto> getInventario(){
+        return inventario;
+    }
+    public Wallet getWallet(){
+        return w;
+    }
 }

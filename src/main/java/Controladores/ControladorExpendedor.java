@@ -9,7 +9,7 @@ public class ControladorExpendedor {
     private Expendedor exp;
     private panelExpendedor panelExp;
 
-    public ControladorExpendedor(Expendedor expend, panelExpendedor panelExpend) {
+    public ControladorExpendedor(Expendedor expend,Comprador comp, panelExpendedor panelExpend,ControladorComprador conCompr) {
         this.exp = expend;
         this.panelExp = panelExpend;
 
@@ -23,6 +23,9 @@ public class ControladorExpendedor {
                     panelExp.getPanelInput().mostrarVuelto(evt.getNewValue());
                 case "Producto para Retiro":
                     panelExp.getPanelOut().mostrarCambios(evt.getNewValue());
+                case "vuelto":
+                    panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
+
             }
         });
         panelExp.getPanSelProd().getBotonCoca().addActionListener(e -> {
@@ -63,8 +66,9 @@ public class ControladorExpendedor {
 
         panelExp.getPanelOut().getProductoComprado().addActionListener(e -> {
             try {
-                exp.getProductoComprado();
+                comp.añadirProducto(exp,exp.getProductoComprado());
                 panelExp.getPanelInput().getNotificacion().setText("PRODUCTO RETIRADO");
+                System.out.println(comp.getInventario().getDeposito().size());
             }catch (Exception ex){
                 if (ex instanceof DepositoVacioException){
                     panelExp.getPanelInput().getNotificacion().setText("NO HAY PRODUCTO PARA RETIRAR");
@@ -73,10 +77,11 @@ public class ControladorExpendedor {
             }
         });
         panelExp.getPanelInput().getBotonDevolverMonedas().addActionListener(e -> {
-            exp.crearVuelto();
             panelExp.getPanelInput().getDinero().setText("$0");
+            exp.crearVuelto();
             if (!exp.getMonVu().getDeposito().isEmpty()){
                 panelExp.getPanelInput().getBotonSacarMonedas().setIcon(new ImageIcon(getClass().getResource("/img/monedasLleno.png")));
+
             }
         });
         panelExp.getPanelInput().getBotonSacarMonedas().addActionListener(e -> {
@@ -85,7 +90,9 @@ public class ControladorExpendedor {
             if (!exp.getMonVu().getDeposito().isEmpty()){
                 panelExp.getPanelInput().getNotificacion().setText("VUELTO RETIRADO");
                 while (!exp.getMonVu().getDeposito().isEmpty()){
-                    exp.getMonVu().getObjeto();
+                    comp.sacarVuelto(exp);
+                    exp.getWallet().vaciarWallet();
+
                 }
             } else {
                 panelExp.getPanelInput().getNotificacion().setText("NO HAY VUELTO");

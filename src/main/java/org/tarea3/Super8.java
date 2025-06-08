@@ -19,4 +19,8 @@ public class Super8 extends Dulce {
     public double getPrecio() {
         return PreciosProductos.SUPER8.getPrecio();
     }
+    @Override
+    public String toString(){
+        return "super8";
+    }
 }

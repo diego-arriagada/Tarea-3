@@ -18,24 +18,23 @@ public class Wallet{
         return this.ValorWallet;
     }
 
-    public Moneda obtenerMoneda(int valor){
-        for(int i=0;i<deposito.deposito.size();i++){
-            if(deposito.deposito.get(i).getValor() == valor){
-                return deposito.deposito.remove(i);
-            }
-        }
-        return null;
+    public void eliminarMoneda(Moneda m) {
+        deposito.eliminarObjeto(m);
+
     }
 
+
     public void vaciarWallet(){
-        for(int i=0;i<deposito.deposito.size();i++){
-            deposito.deposito.removeFirst();
-        }
+        deposito.deposito.clear(); // Asumiendo que deposito.deposito es LinkedList o similar
     }
 
 
     public void addMoneda(Moneda m){
         deposito.addObjeto(m);
+    }
+
+    public Deposito<Moneda> getDepositoMoneda(){
+        return deposito;
     }
 
 }

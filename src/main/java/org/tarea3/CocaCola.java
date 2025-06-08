@@ -13,9 +13,14 @@ public class CocaCola extends Bebida {
         super(serie);
     }
     public String consumir() {
-        return "cocacola";
+        return "coca cola";
     }
     public double getPrecio() {
         return PreciosProductos.COCA.getPrecio();
+    }
+
+    @Override
+    public String toString(){
+        return "coca cola";
     }
 }

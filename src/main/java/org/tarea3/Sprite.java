@@ -18,4 +18,8 @@ public class Sprite extends Bebida {
     public double getPrecio() {
         return PreciosProductos.SPRITE.getPrecio();
     }
+    @Override
+    public String toString(){
+        return "sprite";
+    }
 }

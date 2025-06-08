@@ -19,4 +19,8 @@ public class Snickers extends Dulce {
     public double getPrecio() {
         return PreciosProductos.SNICKERS.getPrecio();
     }
+    @Override
+    public String toString(){
+        return "snickers";
+    }
 }

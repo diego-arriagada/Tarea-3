@@ -16,17 +16,18 @@ public class Deposito<T> {
         deposito = new ArrayList<T>();
     }
     public void addObjeto(T m) {
-        // Agregar moneda al deposito de vuelto
         if (m != null) {
             deposito.add(m);
         }
     }
     public T getObjeto(){
-        // Retornar una moneda del deposito de vuelto
         if (deposito.size() > 0) {
             return (T)deposito.remove(0);
         }
         return null;
+    }
+    public void eliminarObjeto(T m){
+        deposito.remove(m);
     }
     public ArrayList<T> getDeposito(){
         return deposito;
