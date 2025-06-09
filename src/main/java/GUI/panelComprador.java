@@ -4,6 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 
+/**
+ * panelComprador es un JPanel que representa la interfaz del comprador y sus botones en la Ventana principal (a la derecha del panelExpendedor).
+ *
+ * Contiene botones para acceder al inventario, monedero y tarjeta del comprador.
+ * Además, muestra un fondo personalizado y una caricatura del personaje "Huevo REY".
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class panelComprador extends JPanel {
     private Image imagenFondo;
     private JPanel panelComponentes;

@@ -8,6 +8,17 @@ import org.tarea3.Moneda1000;
 import org.tarea3.Moneda500;
 import org.tarea3.Moneda100;
 
+/**
+ * El panelMonedasDinamico es un JPanel dentro de panelInput que a su vez es parte de panelExpendedor.
+ *
+ * Este panel se actualiza cada vez que se agregue una nueva moneda al monedero del comprador.
+ * Las monedas dentro no salen jamás del panel, y solo representan las monedas que han sido ingresadas desde que se inició la aplicación.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class panelMonedasDinamico extends JPanel {
     private List<Moneda> monedas;
 

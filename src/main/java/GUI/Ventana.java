@@ -5,7 +5,16 @@ import org.tarea3.Wallet;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
-
+/**
+ * Ventana es una clase que representa la ventana principal de la aplicación de la máquina expendedora.
+ *
+ * Contiene dos paneles: uno para el expendedor y otro para el comprador, cada uno con sus respectivos botones y funcionalidades.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class Ventana extends JFrame {
     private panelExpendedor pE;
     private panelComprador pC;

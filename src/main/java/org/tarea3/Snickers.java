@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase Snickers que se desprende de Dulce.
+ * Representa un Snickers que se desprende de Dulce.
  *
  * @author Diego Arriagada
  * @author Victor Galaz

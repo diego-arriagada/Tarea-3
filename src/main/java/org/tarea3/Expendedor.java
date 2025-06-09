@@ -4,16 +4,16 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * La clase `Expendedor` representa una máquina expendedora que gestiona la lógica
- * para dispensar productos y manejar pagos.
+ * La clase Expendedor representa una máquina expendedora que gestiona la lógica central de la aplicación.
  *
- * Contiene múltiples depósitos de productos y un depósito para monedas devueltas.
- * La clase permite comprar productos y calcular el vuelto.
+ * Está compuesta por depósitos de diferentes tipos de productos y monedas.
+ * Permite realizar compras de productos, manejar el pago con monedas, y generar vuelto.
+ * Similarmente a Comprador, cuenta con un controlador de eventos dedicado para notificar cambios en el estado de la máquina expendedora.
  *
  * @author Diego Arriagada
  * @author Victor Galaz
  * @author Matias Catril
- * @version 1.0
+ * @version 2.0
  */
 public class Expendedor {
     private int numProductosInicial;
@@ -36,8 +36,9 @@ public class Expendedor {
     private int cantSuper8;
     private int productoSeleccionado;
     private boolean hayVuelto;
+
     /**
-     * Construye un `Expendedor` con el número especificado de productos para cada tipo.
+     * Construye un Expendedor con el número especificado de productos para cada tipo.
      *
      * @param numProductos el número de productos a inicializar en cada depósito
      */
@@ -70,16 +71,11 @@ public class Expendedor {
     }
 
     /**
-     * Intenta comprar un producto de la máquina expendedora.
+     * Agrega una moneda al depósito de monedas del expendedor y actualiza el valor total de las monedas ingresadas.
+     * Notifica a los escuchadores sobre el cambio en el valor de las monedas y las monedas almacenadas.
      *
-     * Si el pago es insuficiente, el producto está agotado o el tipo de producto
-     * es inválido, la moneda se devuelve al depósito de monedas.
-     *
-     * @param  walletDeposito  el almacen de monedas ingresadas del expendedor
-     * @param cual el tipo de producto a comprar (por ejemplo, `COCA`, `SPRITE`)
-     * @return el producto comprado, o `null` si la compra falla
+     * @param m la moneda a agregar al depósito
      */
-
     public void compradorMoneda(Moneda m){
         walletDeposito.addMoneda(m);
         monedasAlmacenadas.addMoneda(m);
@@ -92,12 +88,29 @@ public class Expendedor {
     public int getValorMonedasIngresadas(){
         return this.valorMonedasIngresadas;
     }
+
+    /**
+     * Metodo para el escuchador de eventos que notifica el cambio en el valor de las monedas ingresadas al realizar una compra.
+     *
+     * @param valor el valor a restar de las monedas ingresadas
+     */
     public void restarCompra(int valor){
         int valorViejo = getValorMonedasIngresadas();
         this.valorMonedasIngresadas = this.valorMonedasIngresadas - valor;
         escuchador.firePropertyChange("Valor Monedas",valorViejo, this.valorMonedasIngresadas);
     }
 
+    /**
+     * Realiza la compra de un producto seleccionado por el usuario.
+     *
+     * Verifica si hay suficiente dinero, si el depósito del producto seleccionado tiene stock, y actualiza el estado del expendedor y los depósitos correspondientes.
+     * Hace uso del enum PreciosProductos para determinar el precio del producto seleccionado.
+     * Notifica a los escuchadores sobre el cambio en el producto comprado y si hay vuelto disponible.
+     *
+     * @throws NoHayProductoException si no hay stock del producto seleccionado
+     * @throws PagoInsuficienteException si el dinero ingresado es insuficiente para comprar el producto
+     * @throws DepositoLlenoException si el depósito del producto está lleno
+     */
     public void compraDeProducto() throws NoHayProductoException, PagoInsuficienteException, DepositoLlenoException{
             int dinero = getValorMonedasIngresadas();
             Deposito<Producto> depositoSeleccionado = null;
@@ -159,11 +172,12 @@ public class Expendedor {
     }
 
     /**
-     * Recupera una moneda del depósito de monedas (vuelto).
+     * Crea el vuelto correspondiente al valor de las monedas ingresadas.
      *
-     * @return una moneda del depósito de monedas, o `null` si no hay monedas disponibles
+     * Descompone el valor en monedas de 1000, 500 y 100, y las agrega al depósito de vuelto en orden de mayor a menor valor
+     * (ej: 3500 se convierten en 3 monedas de 1000, 1 de 500 y 0 de 100).
+     * Ademas, resetea el valor de las monedas ingresadas a cero y notifica a los escuchadores sobre el cambio.
      */
-
     public void crearVuelto(){
         int valorViejo = getValorMonedasIngresadas();
         while (this.valorMonedasIngresadas > 0) {
@@ -184,20 +198,30 @@ public class Expendedor {
         escuchador.firePropertyChange("vuelto",valorViejo,this.valorMonedasIngresadas);
     }
 
+    /**
+     * Agrega un escuchador de cambios a la máquina expendedora.
+     *
+     * @param listener el escuchador que se desea agregar
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         escuchador.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Verifica si hay vuelto en el depósito de vuelto.
+     *
+     * @return true si hay vuelto disponible, false en caso contrario.
+     */
     public Boolean hayVuelto(){
         return !(monVu.deposito.isEmpty());
     }
+
     public Moneda getVuelto() {
         return monVu.getObjeto();
     }
     public Wallet getWallet(){
         return walletDeposito;
     }
-
     public int getProductoSeleccionado() {
         return productoSeleccionado;
     }
@@ -214,11 +238,9 @@ public class Expendedor {
         return productoRetirado;
 
     }
-
     public Deposito<Moneda> getMonVu() {
         return monVu;
     }
-
     public int getCantidad(int productoSeleccionado){
         if(productoSeleccionado == 0){
             return cantCoca;
@@ -236,14 +258,18 @@ public class Expendedor {
         }
         else return -1;
     }
-
     public int getNumProductosInicial() {
         return numProductosInicial;
     }
-
     public Wallet getMonedasAlmacenadasWallet(){
         return monedasAlmacenadas;
     }
+
+    /**
+     * Agrega stock extra a los productos de la máquina expendedora.
+     *
+     * Incrementa el stock de cada tipo de producto en 1.
+     */
     public void agregarStock(){
             System.out.println("expendedora STONKS");
             coca.addObjeto(new CocaCola(100 + getCounterExtraProd()));

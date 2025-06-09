@@ -5,10 +5,29 @@ import org.tarea3.*;
 
 import javax.swing.*;
 
+/**
+ * ControladorExpendedor es la clase encargada de conectar la lógica del expendedor con el panel de expendedor en la interfaz gráfica.
+ *
+ * Escucha los eventos de la máquina y actualiza la interfaz gráfica en consecuencia.
+ * En particular, permite seleccionar productos, realizar compras, retirar productos y manejar el vuelto.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class ControladorExpendedor {
     private Expendedor exp;
     private panelExpendedor panelExp;
 
+    /**
+     * Constructor de ControladorExpendedor.
+     *
+     * @param expend Instancia del expendedor que interactúa con el sistema.
+     * @param comp Instancia del comprador que interactúa con el expendedor.
+     * @param panelExpend Panel del expendedor donde se encuentran los botones de interacción.
+     * @param conCompr Controlador del comprador para manejar las interacciones del comprador.
+     */
     public ControladorExpendedor(Expendedor expend,Comprador comp, panelExpendedor panelExpend,ControladorComprador conCompr) {
         this.exp = expend;
         this.panelExp = panelExpend;

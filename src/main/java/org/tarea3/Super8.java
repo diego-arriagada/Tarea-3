@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase Super8 que se desprende de Dulce.
+ * Representa un Super8 que se desprende de Dulce.
  *
  * @author Diego Arriagada
  * @author Victor Galaz

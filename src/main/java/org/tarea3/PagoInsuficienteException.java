@@ -8,7 +8,6 @@ package org.tarea3;
  * @author Matias Catril
  * @version 1.0
  */
-
 public class PagoInsuficienteException extends Exception{
     public PagoInsuficienteException(){
         super("Pago insuficiente para el producto solicitado");

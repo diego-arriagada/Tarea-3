@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Enumeración que guarda los precios de los productos disponibles en la máquina expendedora.
+ * Enumeración que guarda los precios y el orden de los productos disponibles en la máquina expendedora.
  *
  * @author Diego Arriagada
  * @author Victor Galaz

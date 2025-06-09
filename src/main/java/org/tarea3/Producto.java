@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase abstracta Producto, que forma la base de la jerarquía de productos.
+ * Clase abstracta Producto, que forma la base de la jerarquía de productos (Bebidas y Dulces).
  *
  * @author Diego Arriagada
  * @author Victor Galaz

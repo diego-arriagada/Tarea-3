@@ -10,6 +10,18 @@ import org.tarea3.Comprador;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * VentanaInventario es una ventana que muestra el inventario de productos del comprador.
+ *
+ * Permite al comprador consumir productos seleccionados de su inventario.
+ * Cada vez que se compra un producto en la maquina, se añade al inventario del comprador.
+ * Esta ventana se abre al hacer clic en el botón "Inventario" en la interfaz del comprador.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class VentanaInventario extends JFrame {
     private DefaultListModel<Producto> modeloInventario;
     private Wallet wallet;

@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase Sprite que se desprende de Bebida.
+ * Representa una bebida Sprite que se desprende de Bebida.
  *
  * @author Diego Arriagada
  * @author Victor Galaz

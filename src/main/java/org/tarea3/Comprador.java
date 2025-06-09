@@ -3,12 +3,15 @@ package org.tarea3;
 import javax.swing.*;
 
 /**
- * Clase Comprador que sirve para simular la compra de un producto en la máquina expendedora.
+ * Clase Comprador que representa a un comprador en el sistema de expendedor.
+ *
+ * Esta clase maneja el inventario de productos del comprador y su monedero.
+ * Tiene un controlador dedicado que le permite interactuar con la GUI mediante botones para ver su inventario y monedero.
  *
  * @author Diego Arriagada
  * @author Victor Galaz
  * @author Matias Catril
- * @version 1.0
+ * @version 2.0
  */
 public class Comprador {
     private String sonidoProducto;
@@ -18,8 +21,12 @@ public class Comprador {
     private DefaultListModel<Producto> modeloInventario = new DefaultListModel<>();
     private DefaultListModel<Moneda> modeloMonedero = new DefaultListModel<>();
 
-
-
+    /**
+     * Constructor de la clase Comprador.
+     * Inicializa el inventario y el monedero del comprador con monedas predeterminadas, además de sincronizar el modelo de inventario y monedero.
+     *
+     * @param w Wallet del comprador que contiene las monedas.
+     */
     public Comprador(Wallet w) {
         this.inventario = new Deposito<Producto>();
         this.w = w;
@@ -40,6 +47,9 @@ public class Comprador {
         sincronizarModelo();
     }
 
+    /**
+     * Metodo para sincronizar el modelo de inventario y monedero con los depósitos actuales.
+     */
     public void sincronizarModelo() {
         modeloInventario.clear();
         modeloMonedero.clear();
@@ -57,6 +67,12 @@ public class Comprador {
         return modeloMonedero;
     }
 
+    /**
+     * Metodo para ingresar una moneda al expendedor.
+     *
+     * @param m Moneda a ingresar.
+     * @param exp Expendedor donde se ingresará la moneda.
+     */
     public void ingresarMoneda(Moneda m,Expendedor exp){
         exp.compradorMoneda(m);
     }
@@ -66,6 +82,13 @@ public class Comprador {
         this.añadirProducto(exp,exp.getProductoComprado());
     }
 
+    /**
+     * Metodo para añadir un producto al inventario del comprador.
+     *
+     * @param exp Expendedor desde donde se añade el producto.
+     * @param producto Producto a añadir al inventario.
+     * @throws DepositoVacioException Si el depósito de productos está vacío.
+     */
     public void añadirProducto(Expendedor exp,Producto producto) throws DepositoVacioException {
         getInventario().addObjeto(producto);
         getModeloInventario().addElement(producto);
@@ -75,6 +98,11 @@ public class Comprador {
         modeloInventario.removeElement(p);
     }
 
+    /**
+     * Metodo para sacar el vuelto del expendedor y añadirlo al monedero del comprador.
+     *
+     * @param exp Expendedor desde donde se saca el vuelto.
+     */
     public void sacarVuelto(Expendedor exp){
         while(exp.hayVuelto()){
             Moneda m = exp.getVuelto();

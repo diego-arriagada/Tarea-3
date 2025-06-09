@@ -4,6 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import org.tarea3.*;
 
+/**
+ * panelInput es un JPanel en panelExpendedor que se encuentra a la izquierda del panelInput y sobre el panelOut.
+ *
+ * Este panel contiene botones para seleccionar productos, cada uno con su respectivo stock e imagen.
+ * Los botones permiten al usuario seleccionar un producto para comprarlo asumiendo que hay stock y dinero suficiente.
+ * Una vez comprado, el stock se actualiza y el producto seleccionado se muestra en el panelOut.
+ * Pictoricamente, representa el frontis de la maquina expendedora, donde el usuario ve los productos detras de un cristal.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class panelSeleccionProducto extends JPanel {
     JPanel cocaPanel;
     JPanel spritePanel;
@@ -92,8 +105,6 @@ public class panelSeleccionProducto extends JPanel {
         this.add(super8Panel);
 
     }
-
-
 
     public JButton getBotonCoca(){
         return cocaBoton;

@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase Fanta que se desprende de Bebida.
+ * Representa una bebida Fanta que se desprende de Bebida.
  *
  * @author Diego Arriagada
  * @author Victor Galaz

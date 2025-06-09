@@ -5,6 +5,18 @@ import org.tarea3.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * panelOut es un JPanel dentro de panelExpendedor que se encuentra debajo de panelInput y panelSeleccionProducto.
+ *
+ * Este panel muestra el producto comprado por el usuario, representado por un botón que cambia su icono según el producto adquirido.
+ * Pictoricamente, representa al deposito donde caen los productos comprados por el usuario.
+ * La imagen del producto en si es un boton que permite extraer el producto comprado y añadirlo al inventario del comprador.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class panelOut extends JPanel {
     private JButton producto;
     private JButton botonSacar;

@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase abstracta Moneda, que forma la base de la jerarquía de monedas.
+ * Clase abstracta Moneda, que forma la base de la jerarquía de monedas (Moneda100, Moneda500, Moneda1000).
  *
  * La clase implementa la interfaz Comparable, para establecer un criterio a usar en la ordenacion del main.
  *

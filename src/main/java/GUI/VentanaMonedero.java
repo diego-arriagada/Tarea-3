@@ -11,6 +11,17 @@ import javax.swing.*;
 import java.awt.*;
 import org.tarea3.Expendedor;
 
+/**
+ * VentanaMonedero es una ventana que muestra el monedero del comprador.
+ *
+ * Permite al comprador introducir monedas desde su monedero a un expendedor.
+ * Similarmente a VentanaInventario, esta ventana se abre al hacer clic en el botón "Monedero" en el panel del comprador.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class VentanaMonedero extends JFrame {
     private DefaultListModel<Moneda> modeloWallet;
     private Wallet wallet;

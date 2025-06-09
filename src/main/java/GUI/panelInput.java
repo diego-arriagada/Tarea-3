@@ -4,6 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import org.tarea3.*;
 
+/**
+ * panelInput es un JPanel que representa la interfaz de entrada de la máquina expendedora, perteneciente al panelExpendedor.
+ *
+ * Este panel se encuentra a la derecha del panelSeleccionProducto y contiene botones para comprar productos, devolver monedas, y agregar stock.
+ * Muestra el dinero disponible, el producto seleccionado previo a la compra, notificaciones de estado y el deposito de monedas almacenadas.
+ * Este ultimo se actualiza dinámicamente para reflejar las monedas que han sido ingresadas en la máquina expendedora desde que se inició la aplicación.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class panelInput extends JPanel {
     private JLabel dinero;
     private JLabel producto;

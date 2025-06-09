@@ -8,7 +8,7 @@ package org.tarea3;
  * @author Matias Catril
  * @version 1.0
  */
-abstract class Bebida extends Producto {
+public abstract class Bebida extends Producto {
     public Bebida(int x) {
         super(x);
     }

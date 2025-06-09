@@ -1,7 +1,7 @@
 package org.tarea3;
 
 /**
- * Clase CocaCola que se desprende de Bebida.
+ * Representa una bebida CocaCola que se desprende de Bebida.
  *
  * @author Diego Arriagada
  * @author Victor Galaz
