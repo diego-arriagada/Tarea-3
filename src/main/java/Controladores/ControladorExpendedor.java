@@ -31,9 +31,6 @@ public class ControladorExpendedor {
                 case "vuelto":
                     panelExp.getPanelInput().mostrarCambios(evt.getNewValue());
                     break;
-                case "stock":
-                    panelExp.getPanSelProd().mostrarCambios(evt.getNewValue());
-                    break;
                 case "Monedas Almacenadas":
                     panelExp.getPanelInput().actualizarMonedasAlmacenadas();
             }
@@ -104,12 +101,20 @@ public class ControladorExpendedor {
                 panelExp.getPanelInput().getNotificacion().setText("VUELTO RETIRADO");
                 while (!exp.getMonVu().getDeposito().isEmpty()){
                     comp.sacarVuelto(exp);
-                    exp.getWallet().vaciarWallet();
 
                 }
             } else {
                 panelExp.getPanelInput().getNotificacion().setText("NO HAY VUELTO");
             }
+        });
+        panelExp.getPanelInput().getBotonAgregarStock().addActionListener(e -> {
+            expend.agregarStock();
+            panelExpend.getPanSelProd().setStock(0, exp.getCantidad(0));
+            panelExpend.getPanSelProd().setStock(1, exp.getCantidad(1));
+            panelExpend.getPanSelProd().setStock(2, exp.getCantidad(2));
+            panelExpend.getPanSelProd().setStock(3, exp.getCantidad(3));
+            panelExpend.getPanSelProd().setStock(4, exp.getCantidad(4));
+
         });
     }
 }

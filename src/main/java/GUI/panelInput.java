@@ -11,6 +11,7 @@ public class panelInput extends JPanel {
     private JButton botonDevolverMonedas;
     private JButton botonComprar;
     private JButton botonSacarMonedas;
+    private JButton botonStock;
     private PanelMonedasDinamico monedasAlmacenadas;
     private Wallet monedasAlmacenadasWallet;
 
@@ -84,6 +85,17 @@ public class panelInput extends JPanel {
         this.botonSacarMonedas.setFocusPainted(false);
         panelComponentes.add(this.botonSacarMonedas);
 
+        this.botonStock = new JButton("<html><div style='text-align: center;'>AGREGAR<br>STOCK</div></html>");
+        this.botonStock.setFont(new Font("Arial", Font.BOLD, 12));
+        this.botonStock.setBounds(105, 165, 90, 40);
+        this.botonStock.setOpaque(true);
+        this.botonStock.setContentAreaFilled(true);
+        this.botonStock.setBorderPainted(true);
+        this.botonStock.setBackground(new Color(200, 200, 60));
+        this.botonStock.setForeground(Color.BLACK);
+        this.botonStock.setFocusPainted(false);
+        panelComponentes.add(this.botonStock);
+
         add(panelComponentes, BorderLayout.CENTER);
 
         monedasAlmacenadas = new PanelMonedasDinamico(monedasAlmacenadasWallet.getDepositoMoneda().getDeposito());
@@ -120,5 +132,8 @@ public class panelInput extends JPanel {
     }
     public JButton getBotonSacarMonedas(){
         return botonSacarMonedas;
+    }
+    public JButton getBotonAgregarStock(){
+        return botonStock;
     }
 }

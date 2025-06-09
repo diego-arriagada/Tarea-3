@@ -93,9 +93,7 @@ public class panelSeleccionProducto extends JPanel {
 
     }
 
-    public void mostrarCambios(Object valorActualizado){
-        stockCocaLabel.setText("$"+(int)valorActualizado);
-    }
+
 
     public JButton getBotonCoca(){
         return cocaBoton;

@@ -17,6 +17,7 @@ import java.beans.PropertyChangeSupport;
  */
 public class Expendedor {
     private int numProductosInicial;
+    private int counterExtraProd;
     private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
     private Deposito<Producto> fanta;
@@ -42,6 +43,7 @@ public class Expendedor {
      */
     public Expendedor(int numProductos) {
         this.numProductosInicial = numProductos;
+        this.counterExtraProd = numProductos;
         this.monedasAlmacenadas = new Wallet();
         coca = new Deposito<>();
         sprite = new Deposito<>();
@@ -82,7 +84,7 @@ public class Expendedor {
         walletDeposito.addMoneda(m);
         monedasAlmacenadas.addMoneda(m);
         int valorViejo = getValorMonedasIngresadas();
-        this.valorMonedasIngresadas = walletDeposito.getvalorWallet();
+        this.valorMonedasIngresadas = this.valorMonedasIngresadas + m.getValor();
         escuchador.firePropertyChange("Valor Monedas",valorViejo, this.getValorMonedasIngresadas());
         escuchador.firePropertyChange("Monedas Almacenadas", null, monedasAlmacenadas); // <-- línea agregada
     }
@@ -241,5 +243,26 @@ public class Expendedor {
 
     public Wallet getMonedasAlmacenadasWallet(){
         return monedasAlmacenadas;
+    }
+    public void agregarStock(){
+            System.out.println("Stonnks");
+            coca.addObjeto(new CocaCola(100 + getCounterExtraProd()));
+            cantCoca++;
+            sprite.addObjeto(new Sprite(200 + getCounterExtraProd()));
+            cantSprite++;
+            fanta.addObjeto(new Fanta(300 + getCounterExtraProd()));
+            cantFanta++;
+            snicker.addObjeto(new Snickers(400 + getCounterExtraProd()));
+            cantSnickers++;
+            super8.addObjeto(new Super8(500 + getCounterExtraProd()));
+            cantSuper8++;
+            setCounterExtraProd(getCounterExtraProd()+1);
+        }
+
+    public int getCounterExtraProd() {
+        return counterExtraProd;
+    }
+    public void setCounterExtraProd(int n){
+        this.counterExtraProd = n;
     }
 }
