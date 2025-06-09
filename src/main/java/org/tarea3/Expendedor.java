@@ -245,7 +245,7 @@ public class Expendedor {
         return monedasAlmacenadas;
     }
     public void agregarStock(){
-            System.out.println("Stonnks");
+            System.out.println("expendedora STONKS");
             coca.addObjeto(new CocaCola(100 + getCounterExtraProd()));
             cantCoca++;
             sprite.addObjeto(new Sprite(200 + getCounterExtraProd()));
