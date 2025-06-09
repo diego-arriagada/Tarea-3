@@ -36,6 +36,7 @@ public class Comprador {
         w.addMoneda(new Moneda100());
         w.addMoneda(new Moneda100());
         w.addMoneda(new Moneda100());
+
         sincronizarModelo();
     }
 
@@ -44,7 +45,6 @@ public class Comprador {
         modeloMonedero.clear();
         for (Producto p : inventario.getDeposito()) {
             modeloInventario.addElement(p);
-            System.out.println("Elemento nuevo en inventario");
         }
         for(Moneda m : w.getDepositoMoneda().getDeposito()){
             modeloMonedero.addElement(m);

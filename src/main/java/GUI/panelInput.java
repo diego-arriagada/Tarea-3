@@ -2,8 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import org.tarea3.Deposito;
-import org.tarea3.Moneda;
+import org.tarea3.*;
 
 public class panelInput extends JPanel {
     private JLabel dinero;
@@ -12,20 +11,21 @@ public class panelInput extends JPanel {
     private JButton botonDevolverMonedas;
     private JButton botonComprar;
     private JButton botonSacarMonedas;
-    public panelInput(){
-        super();
-        this.setLayout(new BorderLayout());
+    private PanelMonedasDinamico monedasAlmacenadas;
+    private Wallet monedasAlmacenadasWallet;
 
+    public panelInput(Wallet monedasAlmacenadasWallet){
+        super();
+        this.monedasAlmacenadasWallet = monedasAlmacenadasWallet;
+        this.setLayout(new BorderLayout());
         this.setBackground(Color.black);
 
-        Dimension size = new Dimension(200, 150);
+        Dimension size = new Dimension(200, 200);
         this.setPreferredSize(size);
         this.setMinimumSize(size);
         this.setMaximumSize(size);
 
-        JPanel panelComponentes = new JPanel(){
-
-        };
+        JPanel panelComponentes = new JPanel();
         panelComponentes.setOpaque(false);
         panelComponentes.setLayout(null);
 
@@ -47,7 +47,6 @@ public class panelInput extends JPanel {
         this.notificacion.setBounds(5,120,200,70);
         panelComponentes.add(this.notificacion);
 
-
         this.producto = new JLabel("No hay producto seleccionado",JLabel.LEFT);
         this.producto.setFont(new Font("Arial", Font.BOLD, 12));
         this.producto.setForeground(Color.WHITE);
@@ -55,7 +54,7 @@ public class panelInput extends JPanel {
         panelComponentes.add(this.producto);
 
         this.botonDevolverMonedas = new JButton("SACAR VUELTO");
-        this.botonDevolverMonedas.setBounds(5, 5, 190, 40); // Posición (x,y) y tamaño (ancho,alto)
+        this.botonDevolverMonedas.setBounds(5, 5, 190, 40);
         this.botonDevolverMonedas.setOpaque(true);
         this.botonDevolverMonedas.setContentAreaFilled(true);
         this.botonDevolverMonedas.setBorderPainted(true);
@@ -64,41 +63,44 @@ public class panelInput extends JPanel {
         this.botonDevolverMonedas.setFocusPainted(false);
         panelComponentes.add(this.botonDevolverMonedas);
 
-
         this.botonComprar = new JButton("COMPRAR");
         this.botonComprar.setBounds(5, 120, 150, 25);
-
         this.botonComprar.setOpaque(true);
         this.botonComprar.setContentAreaFilled(true);
         this.botonComprar.setBorderPainted(true);
         this.botonComprar.setBackground(new Color(0, 130, 0));
         this.botonComprar.setForeground(Color.WHITE);
         this.botonComprar.setFocusPainted(false);
-
         panelComponentes.add(this.botonComprar);
 
         ImageIcon monedaVaciaIcon = new ImageIcon(getClass().getResource("/img/monedasVacio.png"));
-
         this.botonSacarMonedas = new JButton(monedaVaciaIcon);
-        this.botonSacarMonedas.setBounds(115, 315, 80, 80); // Posición (x,y) y tamaño (ancho,alto)
-
+        this.botonSacarMonedas.setBounds(115, 315, 80, 80);
         this.botonSacarMonedas.setOpaque(true);
         this.botonSacarMonedas.setContentAreaFilled(true);
         this.botonSacarMonedas.setBorderPainted(true);
         this.botonSacarMonedas.setBackground(new Color(130, 0, 0));
         this.botonSacarMonedas.setForeground(Color.WHITE);
         this.botonSacarMonedas.setFocusPainted(false);
-
         panelComponentes.add(this.botonSacarMonedas);
 
         add(panelComponentes, BorderLayout.CENTER);
+
+        monedasAlmacenadas = new PanelMonedasDinamico(monedasAlmacenadasWallet.getDepositoMoneda().getDeposito());
+        monedasAlmacenadas.setBounds(5,165,95,278);
+        panelComponentes.add(monedasAlmacenadas);
     }
+
     public void mostrarCambios(Object valorActualizado){
         dinero.setText("$"+(int) valorActualizado);
     }
 
     public void mostrarVuelto(Object objeto){
         botonSacarMonedas.setIcon(new ImageIcon(getClass().getResource("/img/monedasVacio.png")));
+    }
+
+    public void actualizarMonedasAlmacenadas() {
+        monedasAlmacenadas.setMonedas(monedasAlmacenadasWallet.getDepositoMoneda().getDeposito());
     }
 
     public JButton getBotonComprar(){

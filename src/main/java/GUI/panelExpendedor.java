@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import org.tarea3.Wallet;
 import Controladores.ControladorExpendedor;
 
 public class panelExpendedor extends JPanel{
@@ -9,7 +10,7 @@ public class panelExpendedor extends JPanel{
     private panelInput pI;
     private panelOut pOut;
 
-    public panelExpendedor(){
+    public panelExpendedor(Wallet monedasAlmacenadasWallet){
         super();
         this.setLayout(new BorderLayout());
 
@@ -17,7 +18,7 @@ public class panelExpendedor extends JPanel{
         pSP = new panelSeleccionProducto();
         this.add(pSP,BorderLayout.CENTER);
 
-        pI = new panelInput();
+        pI = new panelInput(monedasAlmacenadasWallet);
         this.add(pI,BorderLayout.EAST);
 
         pOut = new panelOut();

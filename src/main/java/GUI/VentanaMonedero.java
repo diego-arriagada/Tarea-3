@@ -15,7 +15,7 @@ public class VentanaMonedero extends JFrame {
     private DefaultListModel<Moneda> modeloWallet;
     private Wallet wallet;
 
-    public VentanaMonedero(Comprador comp,Wallet wallet,DefaultListModel<Moneda> modelo,Expendedor exp){
+    public VentanaMonedero(Ventana ventana,Comprador comp,Wallet wallet,DefaultListModel<Moneda> modelo,Expendedor exp){
         this.modeloWallet = modelo;
         this.wallet = wallet;
 
@@ -25,6 +25,12 @@ public class VentanaMonedero extends JFrame {
         this.setResizable(false);
         this.setLayout(new BorderLayout());
 
+        if (ventana != null) {
+            Point pos = ventana.getLocationOnScreen();
+            int x = pos.x + ventana.getWidth();
+            int y = pos.y;
+            this.setLocation(x, y);
+        }
 
         JList<Moneda> listaMonedas = new JList<>(modeloWallet);
         add(new JScrollPane(listaMonedas),BorderLayout.CENTER);

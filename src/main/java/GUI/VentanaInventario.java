@@ -14,7 +14,7 @@ public class VentanaInventario extends JFrame {
     private DefaultListModel<Producto> modeloInventario;
     private Wallet wallet;
 
-    public VentanaInventario(Comprador comp,DefaultListModel<Producto> modelo){
+    public VentanaInventario(Ventana ventana,Comprador comp,DefaultListModel<Producto> modelo){
         this.modeloInventario = modelo;
 
 
@@ -23,6 +23,13 @@ public class VentanaInventario extends JFrame {
         this.setSize(400,300);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
+
+        if (ventana != null) {
+            Point pos = ventana.getLocationOnScreen();
+            int x = pos.x + ventana.getWidth();
+            int y = pos.y + 300;
+            this.setLocation(x, y);
+        }
 
 
         JList<Producto> listaProductos = new JList<>(modeloInventario);

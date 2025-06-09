@@ -34,7 +34,8 @@ public class ControladorExpendedor {
                 case "stock":
                     panelExp.getPanSelProd().mostrarCambios(evt.getNewValue());
                     break;
-
+                case "Monedas Almacenadas":
+                    panelExp.getPanelInput().actualizarMonedasAlmacenadas();
             }
         });
         panelExp.getPanSelProd().getBotonCoca().addActionListener(e -> {

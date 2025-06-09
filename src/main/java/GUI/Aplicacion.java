@@ -8,12 +8,13 @@ import java.time.*;
 
 public class Aplicacion {
     public static void main(String[] args){
-        Ventana v = new Ventana();
-        Wallet w = new Wallet();
 
         Expendedor exp = new Expendedor(2);
+        Ventana v = new Ventana(exp.getMonedasAlmacenadasWallet());
+
+        Wallet w = new Wallet();
         Comprador hRey = new Comprador(w);
-        ControladorComprador controladorComprador = new ControladorComprador(hRey,v.getpC(),w,exp);
+        ControladorComprador controladorComprador = new ControladorComprador(v,hRey,v.getpC(),w,exp);
         ControladorExpendedor controlador = new ControladorExpendedor(exp,hRey,v.getpE(),controladorComprador);
 
 

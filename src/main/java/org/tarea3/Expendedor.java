@@ -42,6 +42,7 @@ public class Expendedor {
      */
     public Expendedor(int numProductos) {
         this.numProductosInicial = numProductos;
+        this.monedasAlmacenadas = new Wallet();
         coca = new Deposito<>();
         sprite = new Deposito<>();
         fanta = new Deposito<>();
@@ -63,6 +64,7 @@ public class Expendedor {
         cantSprite = sprite.deposito.size();
         cantSnickers = snicker.deposito.size();
         cantSuper8 = super8.deposito.size();
+
     }
 
     /**
@@ -78,9 +80,11 @@ public class Expendedor {
 
     public void compradorMoneda(Moneda m){
         walletDeposito.addMoneda(m);
+        monedasAlmacenadas.addMoneda(m);
         int valorViejo = getValorMonedasIngresadas();
         this.valorMonedasIngresadas = walletDeposito.getvalorWallet();
         escuchador.firePropertyChange("Valor Monedas",valorViejo, this.getValorMonedasIngresadas());
+        escuchador.firePropertyChange("Monedas Almacenadas", null, monedasAlmacenadas); // <-- línea agregada
     }
 
     public int getValorMonedasIngresadas(){
@@ -160,7 +164,6 @@ public class Expendedor {
 
     public void crearVuelto(){
         int valorViejo = getValorMonedasIngresadas();
-        System.out.println("inicio " + valorMonedasIngresadas);
         while (this.valorMonedasIngresadas > 0) {
 
             if (this.valorMonedasIngresadas >= 1000) {
@@ -173,7 +176,7 @@ public class Expendedor {
                 monVu.addObjeto(new Moneda100());
                 this.valorMonedasIngresadas -= 100;
             }
-            System.out.println("despues de bucle "+valorMonedasIngresadas);
+
         }
         this.valorMonedasIngresadas = 0;
         escuchador.firePropertyChange("vuelto",valorViejo,this.valorMonedasIngresadas);
@@ -234,5 +237,9 @@ public class Expendedor {
 
     public int getNumProductosInicial() {
         return numProductosInicial;
+    }
+
+    public Wallet getMonedasAlmacenadasWallet(){
+        return monedasAlmacenadas;
     }
 }
