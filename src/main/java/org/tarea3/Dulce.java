@@ -9,7 +9,6 @@ package org.tarea3;
  * @version 1.0
  */
 abstract class Dulce extends Producto {
-    private int serie;
     public Dulce(int x){
         super(x);
     }

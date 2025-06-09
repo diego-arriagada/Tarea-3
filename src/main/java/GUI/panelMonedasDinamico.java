@@ -8,10 +8,10 @@ import org.tarea3.Moneda1000;
 import org.tarea3.Moneda500;
 import org.tarea3.Moneda100;
 
-public class PanelMonedasDinamico extends JPanel {
+public class panelMonedasDinamico extends JPanel {
     private List<Moneda> monedas;
 
-    public PanelMonedasDinamico(List<Moneda> monedas) {
+    public panelMonedasDinamico(List<Moneda> monedas) {
         this.monedas = monedas;
         setBackground(Color.GRAY);
         setPreferredSize(new Dimension(80, 40));

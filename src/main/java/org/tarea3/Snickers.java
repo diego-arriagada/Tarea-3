@@ -9,7 +9,6 @@ package org.tarea3;
  * @version 1.0
  */
 public class Snickers extends Dulce {
-    private int serie;
     public Snickers(int x){
         super(x);
     }

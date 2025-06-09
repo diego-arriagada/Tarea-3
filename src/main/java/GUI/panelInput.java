@@ -12,7 +12,7 @@ public class panelInput extends JPanel {
     private JButton botonComprar;
     private JButton botonSacarMonedas;
     private JButton botonStock;
-    private PanelMonedasDinamico monedasAlmacenadas;
+    private panelMonedasDinamico monedasAlmacenadas;
     private Wallet monedasAlmacenadasWallet;
 
     public panelInput(Wallet monedasAlmacenadasWallet){
@@ -98,7 +98,7 @@ public class panelInput extends JPanel {
 
         add(panelComponentes, BorderLayout.CENTER);
 
-        monedasAlmacenadas = new PanelMonedasDinamico(monedasAlmacenadasWallet.getDepositoMoneda().getDeposito());
+        monedasAlmacenadas = new panelMonedasDinamico(monedasAlmacenadasWallet.getDepositoMoneda().getDeposito());
         monedasAlmacenadas.setBounds(5,165,95,278);
         panelComponentes.add(monedasAlmacenadas);
     }

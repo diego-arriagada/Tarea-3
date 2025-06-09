@@ -9,7 +9,6 @@ package org.tarea3;
  * @version 1.0
  */
 public class Super8 extends Dulce {
-    private int serie;
     public Super8(int x){
         super(x);
     }
