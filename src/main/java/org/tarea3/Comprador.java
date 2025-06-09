@@ -40,7 +40,7 @@ public class Comprador {
         sincronizarModelo();
     }
 
-    private void sincronizarModelo() {
+    public void sincronizarModelo() {
         modeloInventario.clear();
         modeloMonedero.clear();
         for (Producto p : inventario.getDeposito()) {
@@ -81,9 +81,14 @@ public class Comprador {
             this.w.addMoneda(m);
             modeloMonedero.addElement(m);
 
-
-
         }
+    }
+
+    public void stonks(){
+        getWallet().getDepositoMoneda().addObjeto(new Moneda1000());
+        getWallet().getDepositoMoneda().addObjeto(new Moneda500());
+        getWallet().getDepositoMoneda().addObjeto(new Moneda100());
+        System.out.println("comprador STONKS");
     }
 
 

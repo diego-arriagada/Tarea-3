@@ -28,6 +28,10 @@ public class ControladorComprador {
             VentanaMonedero monedero = new VentanaMonedero(ventana,comp,comp.getWallet(),comp.getModeloMonedero(),exp);
             monedero.setVisible(true);
         });
+        pComp.getBotonTarjeta().addActionListener(e -> {
+            comp.stonks();
+            comp.sincronizarModelo();
+        });
     }
     public Comprador getComprador(){
         return comp;

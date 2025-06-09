@@ -9,6 +9,7 @@ public class panelComprador extends JPanel {
     private JPanel panelComponentes;
     private JButton botonInventario;
     private JButton botonMonedero;
+    private JButton botonTarjeta;
     private static final int ANCHO = 300;
     private static final int ALTO = 400;
 
@@ -54,6 +55,16 @@ public class panelComprador extends JPanel {
         this.botonMonedero.setFocusPainted(false);
         panelComponentes.add(this.botonMonedero);
 
+        this.botonTarjeta = new JButton();
+        this.botonTarjeta.setBounds(110, 55, 75, 50);
+        this.botonTarjeta.setOpaque(false);
+        this.botonTarjeta.setContentAreaFilled(true);
+        this.botonTarjeta.setBorderPainted(true);
+        this.botonTarjeta.setBackground(new Color(0,0 , 0,0));
+        this.botonTarjeta.setForeground(Color.BLACK);
+        this.botonTarjeta.setFocusPainted(false);
+        panelComponentes.add(this.botonTarjeta);
+
         add(panelComponentes, BorderLayout.SOUTH);
     }
 
@@ -79,5 +90,8 @@ public class panelComprador extends JPanel {
     }
     public JButton getBotonMonedero(){
         return botonMonedero;
+    }
+    public JButton getBotonTarjeta(){
+        return botonTarjeta;
     }
 }
